@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "539238753612",
+    "project_id": "propertieexplore",
+    "storage_bucket": "propertieexplore.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:539238753612:android:86b0548f50120211a89be9",
+        "android_client_info": {
+          "package_name": "com.example.propertie_explore"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwLFqx24WjC9yGa1KlWoRH1DCrLlbnBXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
