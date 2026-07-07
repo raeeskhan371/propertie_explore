@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:propertie_explore/feature/auth/screens/forgot_password_screen.dart';
-import 'package:propertie_explore/feature/auth/screens/login_screen.dart';
-import 'package:propertie_explore/feature/auth/screens/singup_screen.dart';
-import 'package:propertie_explore/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:propertie_explore/feature/properties/home_screen.dart';
-import 'firebase_options.dart';
+import 'package:flutter/material.dart';
+import 'package:propertie_explore/feature/auth/screens/login_screen.dart';
+import 'package:propertie_explore/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Propertie Explore',
       theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: ForgotPasswordScreen(),
+      home: LoginScreen(),
     );
   }
 }

@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
 import 'package:propertie_explore/core/widgets/custome_Textfield.dart';
+import 'package:propertie_explore/feature/auth/services/auth_services.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -11,6 +13,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,9 +45,14 @@ class _LoginScreenState extends State<LoginScreen> {
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Column(
               children: [
-                AppTextformField(hintText: "Email", prefixIcon: Icons.email),
+                AppTextformField(
+                  controller: emailController,
+                  hintText: "Email",
+                  prefixIcon: Icons.email,
+                ),
                 const SizedBox(height: 15),
                 AppTextformField(
+                  controller: passwordController,
                   hintText: "Enter Your Password",
                   suffix: Icons.visibility,
                 ),
@@ -57,7 +66,15 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadius: 10,
                   TextColor: Colors.white,
                   fontSize: 20,
-                  onPressed: () {},
+                  onPressed: () async {
+                    print("Login Button Presssed");
+                    AuthFireBaseServices user = AuthFireBaseServices();
+                    await user.userLogin(
+                      email: emailController.text,
+                      password: passwordController.text,
+                      context: context,
+                    );
+                  },
                 ),
               ],
             ),
