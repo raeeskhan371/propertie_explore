@@ -5,7 +5,7 @@ class AppTextformField extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final String? hintText;
-  final IconData prefixIcon;
+  final IconData? prefixIcon;
   final bool obscureText;
   final TextInputType? textInputType;
   final int? maxline;
@@ -18,7 +18,7 @@ class AppTextformField extends StatelessWidget {
     super.key,
     this.controller,
     this.hintText,
-    required this.prefixIcon,
+    this.prefixIcon,
     this.obscureText = false,
     this.textInputType = TextInputType.text,
     this.validator,
@@ -39,7 +39,7 @@ class AppTextformField extends StatelessWidget {
       textCapitalization: textCap,
 
       decoration: InputDecoration(
-        suffix: Icon(suffix),
+        suffixIcon: Icon(suffix),
         hintText: hintText,
         prefixIcon: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 13),
