@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
 import 'package:propertie_explore/core/widgets/custome_Textfield.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
+import 'package:propertie_explore/feature/properties/house_owner/screens/house_owner.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -73,6 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       email: emailController.text,
                       password: passwordController.text,
                       context: context,
+                    );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => HouseOwner()),
                     );
                   },
                 ),
