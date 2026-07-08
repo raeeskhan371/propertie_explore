@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/screens/login_screen.dart';
 import 'package:propertie_explore/feature/auth/screens/singup_screen.dart';
+import 'package:propertie_explore/feature/properties/customer/screens/property_overview_screen.dart';
 import 'package:propertie_explore/feature/properties/house_owner/screens/add_propertie.dart';
 import 'package:propertie_explore/firebase_options.dart';
 

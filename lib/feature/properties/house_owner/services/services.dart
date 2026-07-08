@@ -7,6 +7,7 @@ class PropertyServices {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> addProperty({
+    required String ownerName,
     required String title,
     required String propertyType,
     required double area,
@@ -17,9 +18,9 @@ class PropertyServices {
     required String description,
   }) async {
     final uid = await _auth.currentUser!.uid;
-    final repo = await _firestore.collection("Users").doc(uid);
-    final propertyRepo = await repo.collection("property").doc();
+
     final propertyModel = PropertieModel(
+      ownerName: ownerName,
       title: title,
       propertyType: propertyType,
       area: area,
@@ -28,8 +29,9 @@ class PropertyServices {
       bath: bath,
       location: location,
       description: description,
+      ownerID: uid,
     );
 
-    await propertyRepo.set(propertyModel.toMap());
+    await _firestore.collection("properties").doc().set(propertyModel.toMap());
   }
 }

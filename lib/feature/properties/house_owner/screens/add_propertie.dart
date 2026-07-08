@@ -11,6 +11,7 @@ class AddPropertie extends StatefulWidget {
 }
 
 class _AddPropertieState extends State<AddPropertie> {
+  TextEditingController OwnerController = TextEditingController();
   TextEditingController titleController = TextEditingController();
   TextEditingController areaController = TextEditingController();
   TextEditingController priceController = TextEditingController();
@@ -30,6 +31,8 @@ class _AddPropertieState extends State<AddPropertie> {
       ),
       body: Column(
         children: [
+          SizedBox(height: 10),
+          AppTextformField(controller: OwnerController, hintText: "Owner Name"),
           SizedBox(height: 10),
           AppTextformField(controller: titleController, hintText: "title"),
           SizedBox(height: 10),
@@ -74,8 +77,10 @@ class _AddPropertieState extends State<AddPropertie> {
             fontSize: 20,
             onPressed: () async {
               // Cheacking Controllers
-              PropertyServices property = PropertyServices();
+
+              String ownerName = OwnerController.text;
               String title = titleController.text;
+              PropertyServices property = PropertyServices();
               String propertyType = propertieSelected;
               double area = double.parse(areaController.text);
               double price = double.parse(priceController.text);
@@ -85,6 +90,7 @@ class _AddPropertieState extends State<AddPropertie> {
               String description = descController.text;
 
               await property.addProperty(
+                ownerName: ownerName,
                 title: title,
                 propertyType: propertyType,
                 area: area,

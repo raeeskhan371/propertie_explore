@@ -74,10 +74,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       password: passwordController.text,
                       context: context,
                     );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => HouseOwner()),
-                    );
                   },
                 ),
               ],

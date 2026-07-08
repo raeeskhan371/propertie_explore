@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PropertieModel {
-  final String? id;
+  final String ownerName;
   final String title;
   final String propertyType;
   final double area;
@@ -10,9 +10,13 @@ class PropertieModel {
   final int bath;
   final String location;
   final String description;
+  final String? id;
+  final String? ownerID;
+
   Timestamp? createdAt;
 
   PropertieModel({
+    required this.ownerName,
     required this.title,
     required this.propertyType,
     required this.area,
@@ -23,33 +27,39 @@ class PropertieModel {
     required this.description,
     this.createdAt,
     this.id,
+    this.ownerID,
   });
 
   Map<String, dynamic> toMap() {
     return {
+      "ownerName": ownerName,
       "title": title,
       "propertyType": propertyType,
+      "area": area,
       "price": price,
       "bed": bed,
       "bath": bath,
       "location": location,
       "description": description,
       "createdAt": FieldValue.serverTimestamp(),
+      "ownerID": ownerID,
     };
   }
 
-  factory PropertieModel.fromMap(Map<String, dynamic> map, String ID) {
+  factory PropertieModel.fromMap(Map<String, dynamic> map, String? ID) {
     return PropertieModel(
+      ownerName: map["ownerName"],
       title: map["title"],
       propertyType: map["propertyType"],
-      area: map["area"],
-      price: map["price"],
+      area: (map["area"] as num).toDouble(),
+      price: (map["price"] as num).toDouble(),
       bed: map["bed"],
       bath: map["bath"],
       location: map["location"],
       description: map["description"],
-      createdAt: map["createdAt"] as Timestamp,
-      id: ID,
+      createdAt: map["createdAt"] as Timestamp?,
+      id: ID ?? "",
+      ownerID: map["ownerID"],
     );
   }
 }
