@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/properties/customer/services/services.dart';
 import 'package:propertie_explore/feature/properties/house_owner/model/propertie_model.dart';
-import 'package:propertie_explore/feature/properties/house_owner/services/services.dart';
 
 class PropertyOverviewScreen extends StatefulWidget {
   const PropertyOverviewScreen({super.key});

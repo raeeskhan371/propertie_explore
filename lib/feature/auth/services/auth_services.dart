@@ -50,7 +50,7 @@ class AuthFireBaseServices {
     if (Role == "houseOwner") {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => HouseOwner()),
+        MaterialPageRoute(builder: (_) => HouseOwnerDashboard()),
       );
     } else if (Role == "customer") {
       Navigator.pushReplacement(

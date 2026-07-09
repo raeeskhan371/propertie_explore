@@ -34,4 +34,20 @@ class PropertyServices {
 
     await _firestore.collection("properties").doc().set(propertyModel.toMap());
   }
+  // fetching Owner Properties
+
+  Stream<List<PropertieModel>> fetchingOwnerProperties() {
+    final uid = _auth.currentUser!.uid;
+
+    final data = _firestore
+        .collection("properties")
+        .where("ownerID", isEqualTo: uid)
+        .snapshots();
+
+    return data.map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return PropertieModel.fromMap(doc.data(), doc.id);
+      }).toList();
+    });
+  }
 }

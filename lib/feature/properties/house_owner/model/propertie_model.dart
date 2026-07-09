@@ -12,7 +12,6 @@ class PropertieModel {
   final String description;
   final String? id;
   final String? ownerID;
-
   Timestamp? createdAt;
 
   PropertieModel({
