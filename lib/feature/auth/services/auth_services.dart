@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/properties/customer/screens/property_overview_screen.dart';
+import 'package:propertie_explore/feature/properties/house_owner/screens/bottom_navigation_bar.dart';
 import 'package:propertie_explore/feature/properties/house_owner/screens/house_owner.dart';
 
 class AuthFireBaseServices {
@@ -50,7 +51,7 @@ class AuthFireBaseServices {
     if (Role == "houseOwner") {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => HouseOwnerDashboard()),
+        MaterialPageRoute(builder: (_) => BottomBar()),
       );
     } else if (Role == "customer") {
       Navigator.pushReplacement(
