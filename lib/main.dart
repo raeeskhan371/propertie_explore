@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:propertie_explore/feature/properties/house_owner/screens/add_propertie_screen.dart';
+import 'package:propertie_explore/feature/auth/screens/login_screen.dart';
+import 'package:propertie_explore/feature/properties/house_owner/screens/AddPropertyScreen.dart';
+import 'package:propertie_explore/feature/properties/house_owner/screens/bottom_bar.dart';
 import 'package:propertie_explore/firebase_options.dart';
 
 void main() async {
@@ -16,10 +18,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Propertie Explore',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
-      home: AddPropertyScreen(),
-    );
+    return MaterialApp(title: 'Propertie Explore', home: LoginScreen());
   }
 }

@@ -10,6 +10,6 @@ class PropertyFeed extends StatefulWidget {
 class _PropertyFeedState extends State<PropertyFeed> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(appBar: AppBar(title: Text("ProfileScreen")));
   }
 }

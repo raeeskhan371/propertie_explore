@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/properties/house_owner/model/propertie_model.dart';
 import 'package:propertie_explore/feature/properties/house_owner/services/services.dart';
 
-class HouseOwnerDashboard extends StatefulWidget {
-  const HouseOwnerDashboard({super.key});
+class MyPropertiesScreen extends StatefulWidget {
+  const MyPropertiesScreen({super.key});
 
   @override
-  State<HouseOwnerDashboard> createState() => _HouseOwnerDashboardState();
+  State<MyPropertiesScreen> createState() => _MyPropertiesScreenState();
 }
 
-class _HouseOwnerDashboardState extends State<HouseOwnerDashboard> {
+class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
   PropertyServices OwnerProperties = PropertyServices();
   @override
   Widget build(BuildContext context) {
