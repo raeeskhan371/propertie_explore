@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/properties/customer/screens/property_overview_screen.dart';
 import 'package:propertie_explore/feature/properties/house_owner/screens/bottom_bar.dart';
-import 'package:propertie_explore/feature/properties/house_owner/screens/my_properties_screen.dart';
 
 class AuthFireBaseServices {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -59,5 +58,22 @@ class AuthFireBaseServices {
         MaterialPageRoute(builder: (_) => PropertyOverviewScreen()),
       );
     }
+  }
+
+  // User Logout
+
+  Future<void> userLogout() async {
+    await _auth.signOut();
+  }
+
+  Future<String> userCheck() async {
+    final uid = _auth.currentUser!.uid;
+    final user = _auth.currentUser;
+
+    // Read Data for Cheacking Role
+
+    final data = await _firestore.collection("Users").doc(uid).get();
+
+    return await data.data()!["role"];
   }
 }
