@@ -39,18 +39,19 @@ class AppTextformField extends StatelessWidget {
       textCapitalization: textCap,
 
       decoration: InputDecoration(
-        suffixIcon: Icon(suffix),
+        suffixIcon: Icon(suffix, color: Colors.white),
         hintText: hintText,
+        hintStyle: TextStyle(color: Colors.white),
         prefixIcon: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 13),
-          child: Icon(prefixIcon, size: 22, color: Colors.grey.shade600),
+          child: Icon(prefixIcon, size: 22, color: Colors.white),
         ),
         enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey),
+          borderSide: BorderSide(color: Colors.white),
           borderRadius: BorderRadius.circular(10),
         ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.indigo.shade400),
+          borderSide: BorderSide(color: Colors.white),
           borderRadius: BorderRadius.circular(20),
         ),
       ),

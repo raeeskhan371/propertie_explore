@@ -2,8 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
+<<<<<<< Updated upstream
 import 'package:propertie_explore/feature/properties/customer_screen.dart';
 import 'package:propertie_explore/feature/properties/house_owner.dart';
+=======
+import 'package:propertie_explore/feature/auth/screens/login_screen.dart';
+import 'package:propertie_explore/feature/properties/customer/screens/property_overview_screen.dart';
+import 'package:propertie_explore/feature/properties/house_owner/screens/bottom_bar.dart';
+import 'package:propertie_explore/feature/properties/house_owner/screens/my_properties_screen.dart';
+>>>>>>> Stashed changes
 
 class AuthFireBaseServices {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -58,5 +65,22 @@ class AuthFireBaseServices {
         MaterialPageRoute(builder: (_) => CustomerScreen()),
       );
     }
+  }
+
+  // User Logout
+
+  Future<void> userLogout() async {
+    await _auth.signOut();
+  }
+
+  Future<String> userCheck() async {
+    final uid = _auth.currentUser!.uid;
+    final user = _auth.currentUser;
+
+    // Read Data for Cheacking Role
+
+    final data = await _firestore.collection("Users").doc(uid).get();
+
+    return await data.data()!["role"];
   }
 }

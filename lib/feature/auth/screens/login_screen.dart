@@ -18,68 +18,99 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Login Screen",
-          style: GoogleFonts.poppins(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
+      backgroundColor: Colors.green,
+
+      body: Padding(
+        padding: const EdgeInsets.only(left: 20, right: 20),
+        child: SizedBox(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(Icons.home_work_rounded, size: 90, color: Colors.white),
+              Text(
+                "Property Explore",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+
+              const SizedBox(height: 8),
+
+              Text(
+                "Find Your Dream Property",
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.9),
+                  fontSize: 15,
+                ),
+              ),
+
+              const SizedBox(height: 50),
+
+              Text(
+                "Welcome Back! ",
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+
+              Text(
+                "We're glad to see you again. Sign in to continue.",
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 10),
+              // Texfield for Use Login Singup
+              Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Column(
+                  children: [
+                    AppTextformField(
+                      controller: emailController,
+                      hintText: "Email",
+                      prefixIcon: Icons.email,
+                    ),
+                    const SizedBox(height: 15),
+                    AppTextformField(
+                      prefixIcon: Icons.lock,
+                      controller: passwordController,
+                      hintText: "Enter Your Password",
+                      suffix: Icons.visibility,
+                    ),
+
+                    const SizedBox(height: 20),
+                    AppElevatedButton(
+                      ButtonText: "Login Screen",
+                      width: 380,
+                      height: 50,
+                      ContainerColor: Colors.green.shade700,
+                      borderRadius: 10,
+                      TextColor: Colors.white,
+                      fontSize: 20,
+                      onPressed: () async {
+                        print("Login Button Presssed");
+                        AuthFireBaseServices user = AuthFireBaseServices();
+                        await user.userLogin(
+                          email: emailController.text,
+                          password: passwordController.text,
+                          context: context,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         ),
-        backgroundColor: Colors.blue,
-        centerTitle: true,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            "Create Your Account ",
-            style: GoogleFonts.poppins(
-              color: Colors.blue,
-              fontSize: 20,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          // Texfield for Use Login Singup
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Column(
-              children: [
-                AppTextformField(
-                  controller: emailController,
-                  hintText: "Email",
-                  prefixIcon: Icons.email,
-                ),
-                const SizedBox(height: 15),
-                AppTextformField(
-                  controller: passwordController,
-                  hintText: "Enter Your Password",
-                  suffix: Icons.visibility,
-                ),
-
-                const SizedBox(height: 20),
-                AppElevatedButton(
-                  ButtonText: "Login Screen",
-                  width: 380,
-                  height: 50,
-                  ContainerColor: Colors.blue,
-                  borderRadius: 10,
-                  TextColor: Colors.white,
-                  fontSize: 20,
-                  onPressed: () async {
-                    print("Login Button Presssed");
-                    AuthFireBaseServices user = AuthFireBaseServices();
-                    await user.userLogin(
-                      email: emailController.text,
-                      password: passwordController.text,
-                      context: context,
-                    );
-                  },
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
