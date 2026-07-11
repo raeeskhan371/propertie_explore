@@ -21,6 +21,7 @@ class _SingupScreenState extends State<SingupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green,
       appBar: AppBar(
         title: Text(
           "Singup Screen",
@@ -29,21 +30,45 @@ class _SingupScreenState extends State<SingupScreen> {
             color: Colors.white,
           ),
         ),
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.green,
         centerTitle: true,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Icon(Icons.home_work_rounded, size: 90, color: Colors.white),
           Text(
-            "Create Your Account ",
+            "Property Explore",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+
+          const SizedBox(height: 8),
+
+          Text(
+            "Find Your Dream Property",
+            style: TextStyle(
+              color: Colors.white.withOpacity(0.9),
+              fontSize: 15,
+            ),
+          ),
+
+          const SizedBox(height: 20),
+          // Texfield for Use Login Singup
+          Text(
+            textAlign: TextAlign.center,
+            "Join Property Explore to explore properties or manage your own listings with ease.",
             style: GoogleFonts.poppins(
-              color: Colors.blue,
-              fontSize: 20,
+              color: Colors.white,
+              fontSize: 14,
               fontWeight: FontWeight.w600,
             ),
           ),
-          // Texfield for Use Login Singup
+
+          const SizedBox(height: 10),
           Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: Column(
@@ -64,24 +89,52 @@ class _SingupScreenState extends State<SingupScreen> {
                   controller: passwordController,
                   hintText: "Create Your Password",
                   suffix: Icons.visibility,
+                  prefixIcon: Icons.lock,
                 ),
                 const SizedBox(height: 15),
                 AppTextformField(
+                  prefixIcon: Icons.lock,
                   controller: confrimPasswordController,
                   hintText: "Confirm Your Password",
                   suffix: Icons.visibility,
                 ),
                 const SizedBox(height: 20),
                 DropdownButtonFormField<String>(
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                  dropdownColor: Colors.green,
+                  icon: Icon(Icons.arrow_drop_down),
+                  hint: Text("Property Type"),
+
                   elevation: 1,
                   items: [
                     DropdownMenuItem(
                       value: "customer",
-                      child: Text("Customer"),
+                      child: Text(
+                        "Client",
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                     DropdownMenuItem(
                       value: "houseOwner",
-                      child: Text("HouseOwer"),
+                      child: Text(
+                        "Owner",
+                        style: GoogleFonts.poppins(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
                     ),
                   ],
                   onChanged: (value) {
