@@ -203,7 +203,7 @@ class PropertyOwnerTile extends StatelessWidget {
                             backgroundColor: Colors.red.shade500,
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(15), //
                             ),
                           ),
                         ),
