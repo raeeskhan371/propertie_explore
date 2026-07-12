@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/properties/house_owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/house_owner/screens/update_screen.dart';
+import 'package:propertie_explore/feature/properties/house_owner/services/services.dart';
 
 class PropertyOwnerTile extends StatelessWidget {
   const PropertyOwnerTile({super.key, required this.property});
@@ -147,7 +149,15 @@ class PropertyOwnerTile extends StatelessWidget {
                       child: SizedBox(
                         height: 54,
                         child: ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    UpdatePropertyScreen(property: property),
+                              ),
+                            );
+                          },
                           icon: const Icon(Icons.edit_rounded, size: 20),
                           label: const Text(
                             "Edit Property",
@@ -174,7 +184,9 @@ class PropertyOwnerTile extends StatelessWidget {
                       child: SizedBox(
                         height: 54,
                         child: ElevatedButton.icon(
-                          onPressed: () {},
+                          onPressed: () {
+                            PropertyServices().deleteProperty(id: property.id!);
+                          },
                           icon: const Icon(
                             Icons.delete_forever_rounded,
                             size: 20,
