@@ -50,7 +50,7 @@ class AuthFireBaseServices {
     if (Role == "houseOwner") {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (_) => BottomBar()),
+        MaterialPageRoute(builder: (_) => OwnerBottomBar()),
       );
     } else if (Role == "customer") {
       Navigator.pushReplacement(
@@ -68,9 +68,6 @@ class AuthFireBaseServices {
 
   Future<String> userCheck() async {
     final uid = _auth.currentUser!.uid;
-    final user = _auth.currentUser;
-
-    // Read Data for Cheacking Role
 
     final data = await _firestore.collection("Users").doc(uid).get();
 

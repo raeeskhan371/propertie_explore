@@ -4,14 +4,14 @@ import 'package:propertie_explore/feature/properties/house_owner/screens/explore
 import 'package:propertie_explore/feature/properties/house_owner/screens/my_properties_screen.dart';
 import 'package:propertie_explore/feature/properties/house_owner/screens/profile_screen.dart';
 
-class BottomBar extends StatefulWidget {
-  const BottomBar({super.key});
+class OwnerBottomBar extends StatefulWidget {
+  const OwnerBottomBar({super.key});
 
   @override
-  State<BottomBar> createState() => _BottomBarState();
+  State<OwnerBottomBar> createState() => _BottomBarState();
 }
 
-class _BottomBarState extends State<BottomBar> {
+class _BottomBarState extends State<OwnerBottomBar> {
   int index = 0;
   void onChangeTap(int inde) {
     setState(() {

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/properties/house_owner/model/propertie_model.dart';
 
 class PropertyServices {
@@ -88,5 +89,11 @@ class PropertyServices {
     final uid = _auth.currentUser!.uid;
 
     final Repo = _firestore.collection("properties").doc(id).delete();
+  }
+
+  Future<UserModel> userFetching() async {
+    final uid = _auth.currentUser!.uid;
+    final result = await _firestore.collection("Users").doc(uid).get();
+    return UserModel.fromMap(result.data()!);
   }
 }

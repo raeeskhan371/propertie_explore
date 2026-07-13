@@ -28,7 +28,7 @@ class _AuthGateScreenState extends State<AuthGateScreen> {
             future: AuthFireBaseServices().userCheck(),
             builder: (context, snapshot) {
               if (snapshot.data == "houseOwner") {
-                return BottomBar();
+                return OwnerBottomBar();
               }
               return PropertyOverviewScreen();
             },

@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                     const SizedBox(height: 20),
                     AppElevatedButton(
-                      ButtonText: "Login Screen",
+                      ButtonText: "Login",
                       width: 380,
                       height: 50,
                       ContainerColor: Colors.green.shade700,
