@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HeaderAddScreen extends StatelessWidget {
-  const HeaderAddScreen({super.key});
+  final VoidCallback onBack;
+  HeaderAddScreen({super.key, required this.onBack});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class HeaderAddScreen extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10, right: 10),
             child: GestureDetector(
               onTap: () {
-                Navigator.pop(context);
+                onBack();
               },
 
               child: Icon(Icons.arrow_back_sharp, size: 20),

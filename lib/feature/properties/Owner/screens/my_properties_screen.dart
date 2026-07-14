@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:propertie_explore/feature/properties/house_owner/model/propertie_model.dart';
-import 'package:propertie_explore/feature/properties/house_owner/services/services.dart';
-import 'package:propertie_explore/feature/properties/house_owner/widgets/property_tile.dart';
+import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
+import 'package:propertie_explore/feature/properties/Owner/services/owner_property_services.dart';
+import 'package:propertie_explore/feature/properties/Owner/widgets/my_property_tile.dart';
+import 'package:provider/provider.dart';
 
 class MyPropertiesScreen extends StatefulWidget {
   const MyPropertiesScreen({super.key});
@@ -11,7 +13,7 @@ class MyPropertiesScreen extends StatefulWidget {
 }
 
 class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
-  PropertyServices OwnerProperties = PropertyServices();
+  OwnerPropertyServices OwnerProperties = OwnerPropertyServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +25,7 @@ class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
         foregroundColor: Colors.white,
       ),
       body: StreamBuilder<List<PropertieModel>>(
-        stream: OwnerProperties.fetchingOwnerProperties(),
+        stream: context.read<OwnerPropertyProvider>().fetchingOwnerProperties(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());

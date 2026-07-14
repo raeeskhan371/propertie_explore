@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/core/util/appWidgets/Custome_text_field.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
-import 'package:propertie_explore/feature/properties/house_owner/screens/bottom_bar.dart';
-import 'package:propertie_explore/feature/properties/house_owner/services/services.dart';
-import 'package:propertie_explore/feature/properties/house_owner/widgets/add_screen_widgets/header_add_screen.dart';
+import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
+import 'package:propertie_explore/feature/properties/Owner/widgets/add_screen_widgets/header_add_screen.dart';
+import 'package:provider/provider.dart';
 
 class AddPropertyScreen extends StatefulWidget {
   final VoidCallback onPropertyAdd;
@@ -32,7 +32,11 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            HeaderAddScreen(),
+            HeaderAddScreen(
+              onBack: () {
+                widget.onPropertyAdd();
+              },
+            ),
             SizedBox(height: 10),
 
             // Main Container
@@ -147,30 +151,63 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                             controller: descController,
                           ),
                           SizedBox(height: 30),
-                          AppElevatedButton(
-                            ButtonText: "Add Property",
-                            width: double.infinity,
-                            height: 70,
-                            ContainerColor: Colors.green,
-                            borderRadius: 15,
-                            TextColor: Colors.white,
-                            fontSize: 20,
-                            onPressed: () async {
-                              PropertyServices propertyServices =
-                                  PropertyServices();
+                          Consumer<OwnerPropertyProvider>(
+                            builder: (context, provider, child) {
+                              return AppElevatedButton(
+                                width: 380,
+                                height: 50,
+                                ContainerColor: Colors.green.shade700,
+                                borderRadius: 10,
+                                TextColor: Colors.white,
+                                fontSize: 20,
+                                child: provider.isLoading
+                                    ? CircularProgressIndicator(
+                                        color: Colors.white,
+                                      )
+                                    : Text(
+                                        "Add Property",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
 
-                              await propertyServices.addProperty(
-                                ownerName: OwnerController.text,
-                                title: titleController.text,
-                                propertyType: selectedPropertyType.toString(),
-                                area: double.parse(areaController.text),
-                                price: double.parse(priceController.text),
-                                bed: int.parse(bedController.text),
-                                bath: int.parse(bathController.text),
-                                location: locationController.text,
-                                description: descController.text,
+                                onPressed: () async {
+                                  try {
+                                    await context
+                                        .read<OwnerPropertyProvider>()
+                                        .addProperty(
+                                          ownerName: OwnerController.text,
+                                          title: titleController.text,
+                                          propertyType: selectedPropertyType
+                                              .toString(),
+                                          area: double.parse(
+                                            areaController.text,
+                                          ),
+                                          price: double.parse(
+                                            priceController.text,
+                                          ),
+                                          bed: int.parse(bedController.text),
+                                          bath: int.parse(bathController.text),
+                                          location: locationController.text,
+                                          description: descController.text,
+                                        );
+                                    widget.onPropertyAdd();
+                                  } catch (e) {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(
+                                          e.toString().replaceFirst(
+                                            "Exception:",
+                                            "",
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  }
+                                },
                               );
-                              widget.onPropertyAdd();
                             },
                           ),
                         ],

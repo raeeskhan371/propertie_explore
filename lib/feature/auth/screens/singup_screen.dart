@@ -159,7 +159,7 @@ class _SingupScreenState extends State<SingupScreen> {
 
                     SizedBox(height: 10),
                     AppElevatedButton(
-                      ButtonText: "SingUp",
+                      child: Text("SingUp"),
                       width: double.infinity,
                       height: 50,
                       ContainerColor: Colors.green.shade700,

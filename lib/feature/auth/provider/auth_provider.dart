@@ -1,33 +1,70 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
-// import 'package:propertie_explore/feature/auth/services/auth_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:propertie_explore/feature/auth/services/auth_services.dart';
 
-// class AuthProvider with ChangeNotifier {
-//   bool _isLoading = false;
-//   bool get isLoading => _isLoading;
+class AuthProvider with ChangeNotifier {
+  final AuthFireBaseServices _authservices = AuthFireBaseServices();
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
 
-//   void loading(bool value) {
-//     _isLoading = value;
-//   }
+  void setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
 
-//   Future<void> userSingUp({
-//     required String name,
-//     required String email,
-//     required String password,
-//     required String role,
-//   }) async {
-//     final AuthFireBaseServices _auth = AuthFireBaseServices();
+  Future<void> userSingUp({
+    required String name,
+    required String email,
+    required String password,
+    required String role,
+  }) async {
+    setLoading(true);
 
-//     try {
-//       loading(true);
-//       notifyListeners();
+    try {
+      await _authservices.userSinup(
+        name: name,
+        email: email,
+        password: password,
+        role: role,
+      );
+    } catch (e) {
+      rethrow;
+    } finally {
+      setLoading(false);
+    }
+  }
 
-//       await _auth.userSinup(
-//         name: name,
-//         email: email,
-//         password: password,
-//         role: role,
-//       );
-//     }  FirebaseAuthException (e) {}
-//   }
-// }
+  Future<void> userLogin({
+    required String email,
+    required String password,
+  }) async {
+    setLoading(true);
+
+    try {
+      await _authservices.userLogin(email: email, password: password);
+    } catch (e) {
+      rethrow;
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  Future<String> userCheck() async {
+    try {
+      return await _authservices.userCheck();
+    } on Exception catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> userLogout() async {
+    setLoading(true);
+    try {
+      await _authservices.userLogout();
+    } catch (e) {
+      rethrow;
+    } finally {
+      setLoading(false);
+    }
+  }
+}

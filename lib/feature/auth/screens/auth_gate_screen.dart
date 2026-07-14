@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/screens/login_screen.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
 import 'package:propertie_explore/feature/properties/customer/screens/property_overview_screen.dart';
-import 'package:propertie_explore/feature/properties/house_owner/screens/bottom_bar.dart';
+import 'package:propertie_explore/feature/properties/Owner/screens/bottom_bar.dart';
 
 class AuthGateScreen extends StatefulWidget {
   const AuthGateScreen({super.key});

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
 import 'package:propertie_explore/core/widgets/custome_Textfield.dart';
+import 'package:propertie_explore/feature/auth/provider/auth_provider.dart';
 import 'package:propertie_explore/feature/auth/screens/singup_screen.dart';
-import 'package:propertie_explore/feature/auth/services/auth_services.dart';
+import 'package:propertie_explore/feature/properties/customer/screens/property_overview_screen.dart';
+import 'package:propertie_explore/feature/properties/Owner/screens/bottom_bar.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -87,24 +90,67 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
 
                     const SizedBox(height: 20),
-                    AppElevatedButton(
-                      ButtonText: "Login",
-                      width: 380,
-                      height: 50,
-                      ContainerColor: Colors.green.shade700,
-                      borderRadius: 10,
-                      TextColor: Colors.white,
-                      fontSize: 20,
-                      onPressed: () async {
-                        print("Login Button Presssed");
-                        AuthFireBaseServices user = AuthFireBaseServices();
-                        await user.userLogin(
-                          email: emailController.text,
-                          password: passwordController.text,
-                          context: context,
+                    Consumer<AuthProvider>(
+                      builder: (context, provider, child) {
+                        return AppElevatedButton(
+                          width: 380,
+                          height: 50,
+                          ContainerColor: Colors.green.shade700,
+                          borderRadius: 10,
+                          TextColor: Colors.white,
+                          fontSize: 20,
+                          child: provider.isLoading
+                              ? CircularProgressIndicator(color: Colors.white)
+                              : Text(
+                                  "Login",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+
+                          onPressed: () async {
+                            try {
+                              await context.read<AuthProvider>().userLogin(
+                                email: emailController.text,
+                                password: passwordController.text,
+                              );
+
+                              final role = await context
+                                  .read<AuthProvider>()
+                                  .userCheck();
+
+                              if (role == "houseOwner") {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => OwnerBottomBar(),
+                                  ),
+                                );
+                              } else {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        PropertyOverviewScreen(),
+                                  ),
+                                );
+                              }
+                            } catch (e) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    e.toString().replaceFirst("Exception:", ""),
+                                  ),
+                                ),
+                              );
+                            }
+                          },
                         );
                       },
                     ),
+
                     const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

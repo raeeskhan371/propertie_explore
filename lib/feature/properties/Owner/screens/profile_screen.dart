@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
 import 'package:propertie_explore/core/widgets/custome_Textfield.dart';
+import 'package:propertie_explore/feature/auth/provider/auth_provider.dart';
 import 'package:propertie_explore/feature/auth/screens/login_screen.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
-import 'package:propertie_explore/feature/properties/house_owner/services/services.dart';
+import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
+import 'package:propertie_explore/feature/properties/Owner/services/owner_property_services.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -13,7 +17,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  PropertyServices propertyServices = PropertyServices();
+  OwnerPropertyServices propertyServices = OwnerPropertyServices();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 const SizedBox(height: 35),
 
                 FutureBuilder(
-                  future: propertyServices.userFetching(),
+                  future: context.read<OwnerPropertyProvider>().userFetching(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(
@@ -112,26 +116,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ),
 
                         const SizedBox(height: 40),
-                        AppElevatedButton(
-                          ButtonText: "Logout",
-                          width: 370,
-                          height: 60,
-                          ContainerColor: Colors.green.shade700,
-                          borderRadius: 10,
-                          TextColor: Colors.white,
-                          fontSize: 20,
-                          onPressed: () async {
-                            AuthFireBaseServices auth = AuthFireBaseServices();
-
-                            await auth.userLogout();
-
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(builder: (_) => LoginScreen()),
-                            );
-                          },
-                        ),
                       ],
+                    );
+                  },
+                ),
+                Consumer<OwnerPropertyProvider>(
+                  builder: (context, provider, child) {
+                    return AppElevatedButton(
+                      width: 370,
+                      height: 60,
+                      ContainerColor: Colors.green.shade700,
+                      borderRadius: 10,
+                      TextColor: Colors.white,
+                      fontSize: 20,
+                      child: Text(
+                        "Logout",
+                        style: GoogleFonts.poppins(
+                          fontSize: 20,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      onPressed: () async {
+                        try {
+                          await context.read<AuthProvider>().userLogout();
+
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (_) => LoginScreen()),
+                          );
+                        } catch (e) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                e.toString().replaceFirst("Exception:", ""),
+                              ),
+                            ),
+                          );
+                        }
+                      },
                     );
                   },
                 ),

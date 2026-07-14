@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:propertie_explore/feature/properties/house_owner/model/propertie_model.dart';
-import 'package:propertie_explore/feature/properties/house_owner/screens/update_screen.dart';
-import 'package:propertie_explore/feature/properties/house_owner/services/services.dart';
+import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/screens/update_screen.dart';
+import 'package:propertie_explore/feature/properties/Owner/services/owner_property_services.dart';
 
 class PropertyOwnerTile extends StatelessWidget {
   const PropertyOwnerTile({super.key, required this.property});
@@ -28,10 +28,13 @@ class PropertyOwnerTile extends StatelessWidget {
             height: 220,
             width: double.infinity,
             decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/house.jpg"),
+                fit: BoxFit.cover,
+              ),
               color: Colors.grey.shade300,
               borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
             ),
-            child: Icon(Icons.image, size: 70, color: Colors.grey.shade700),
           ),
 
           Padding(
@@ -185,7 +188,9 @@ class PropertyOwnerTile extends StatelessWidget {
                         height: 54,
                         child: ElevatedButton.icon(
                           onPressed: () {
-                            PropertyServices().deleteProperty(id: property.id!);
+                            OwnerPropertyServices().deleteProperty(
+                              id: property.id!,
+                            );
                           },
                           icon: const Icon(
                             Icons.delete_forever_rounded,

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:propertie_explore/feature/properties/customer/screens/property_detail_screen.dart';
+import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
+import 'package:propertie_explore/feature/properties/Owner/screens/property_detail_screen.dart';
 import 'package:propertie_explore/feature/properties/customer/services/services.dart';
-import 'package:propertie_explore/feature/properties/house_owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
+import 'package:provider/provider.dart';
 
 class ExplorePropertiesScreen extends StatefulWidget {
   const ExplorePropertiesScreen({super.key});
@@ -15,8 +17,8 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
   CustomerServices property = CustomerServices();
   @override
   Widget build(BuildContext context) {
-    body:
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("property OverView"),
         centerTitle: true,
@@ -24,7 +26,9 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
         foregroundColor: Colors.white,
       ),
       body: StreamBuilder<List<PropertieModel>>(
-        stream: property.fetchingProperties(),
+        stream: context
+            .read<OwnerPropertyProvider>()
+            .fetchingAllOwnerProperties(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -81,8 +85,11 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(16),
                           ),
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/house.jpg"),
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                        child: Icon(Icons.home, size: 60, color: Colors.white),
                       ),
 
                       Padding(
@@ -125,7 +132,7 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
                               children: [
                                 Icon(
                                   Icons.location_on,
-                                  color: Colors.grey,
+                                  color: Colors.red,
                                   size: 18,
                                 ),
                                 SizedBox(width: 5),

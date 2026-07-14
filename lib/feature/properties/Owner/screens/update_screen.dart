@@ -3,8 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/core/util/appWidgets/Custome_text_field.dart'
     show CustomTextField;
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
-import 'package:propertie_explore/feature/properties/house_owner/model/propertie_model.dart';
-import 'package:propertie_explore/feature/properties/house_owner/services/services.dart';
+import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
+import 'package:propertie_explore/feature/properties/Owner/services/owner_property_services.dart';
+import 'package:provider/provider.dart';
 
 class UpdatePropertyScreen extends StatefulWidget {
   final PropertieModel property;
@@ -52,7 +54,7 @@ class _UpdatePropertyScreenState extends State<UpdatePropertyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightGreen,
+      backgroundColor: Colors.green,
       body: SafeArea(
         child: Column(
           children: [
@@ -67,13 +69,15 @@ class _UpdatePropertyScreenState extends State<UpdatePropertyScreen> {
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Colors.green,
                       borderRadius: BorderRadius.circular(100),
                     ),
-                    child: const Icon(Icons.arrow_back_sharp),
+                    child: Icon(Icons.arrow_back_ios_new, color: Colors.white),
                   ),
                 ),
+                SizedBox(width: 75),
                 Text(
+                  textAlign: TextAlign.center,
                   "Update Property",
                   style: GoogleFonts.poppins(
                     fontSize: 20,
@@ -81,15 +85,7 @@ class _UpdatePropertyScreenState extends State<UpdatePropertyScreen> {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: const Icon(Icons.home),
-                ),
+                Expanded(child: SizedBox()),
               ],
             ),
 
@@ -203,31 +199,62 @@ class _UpdatePropertyScreenState extends State<UpdatePropertyScreen> {
 
                         const SizedBox(height: 30),
 
-                        AppElevatedButton(
-                          ButtonText: "Update Property",
-                          width: double.infinity,
-                          height: 70,
-                          ContainerColor: Colors.orange,
-                          borderRadius: 15,
-                          TextColor: Colors.white,
-                          fontSize: 20,
-                          onPressed: () {
-                            PropertyServices propertyServices =
-                                PropertyServices();
-                            propertyServices.UpdateProperty(
-                              ownerName: OwnerController.text,
-                              title: titleController.text,
-                              propertyType: selectedPropertyType.toString(),
-                              area: double.parse(areaController.text),
-                              price: double.parse(priceController.text),
-                              bed: int.parse(bedController.text),
-                              bath: int.parse(bedController.text),
-                              location: locationController.text,
-                              description: descController.text,
-                              id: widget.property.id!,
-                              ownerID: widget.property.ownerID!,
+                        Consumer<OwnerPropertyProvider>(
+                          builder: (context, provider, child) {
+                            return AppElevatedButton(
+                              width: double.infinity,
+                              height: 70,
+                              ContainerColor: Colors.green.shade700,
+                              borderRadius: 15,
+                              TextColor: Colors.white,
+                              fontSize: 20,
+                              child: provider.isLoading
+                                  ? CircularProgressIndicator(
+                                      color: Colors.white,
+                                    )
+                                  : Text(
+                                      "Update Property",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 20,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                              onPressed: () async {
+                                try {
+                                  await context
+                                      .read<OwnerPropertyProvider>()
+                                      .UpdateProperty(
+                                        ownerName: OwnerController.text,
+                                        title: titleController.text,
+                                        propertyType: selectedPropertyType
+                                            .toString(),
+                                        area: double.parse(areaController.text),
+                                        price: double.parse(
+                                          priceController.text,
+                                        ),
+                                        bed: int.parse(bedController.text),
+                                        bath: int.parse(bedController.text),
+                                        location: locationController.text,
+                                        description: descController.text,
+                                        id: widget.property.id!,
+                                        ownerID: widget.property.ownerID!,
+                                      );
+                                  Navigator.pop(context);
+                                } catch (e) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        e.toString().replaceFirst(
+                                          "Exception:",
+                                          "",
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                }
+                              },
                             );
-                            Navigator.pop(context);
                           },
                         ),
                       ],

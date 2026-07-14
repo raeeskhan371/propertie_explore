@@ -47,7 +47,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
                 const SizedBox(height: 20),
                 AppElevatedButton(
-                  ButtonText: "Reset Email Link Send",
+                  child: Text("Reset Email Link Send"),
                   width: 380,
                   height: 50,
                   ContainerColor: Colors.blue,

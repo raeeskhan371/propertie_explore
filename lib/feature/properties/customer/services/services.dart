@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:propertie_explore/feature/properties/house_owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
 
 class CustomerServices {
   FirebaseAuth _auth = FirebaseAuth.instance;
