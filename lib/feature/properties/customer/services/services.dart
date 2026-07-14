@@ -7,7 +7,10 @@ class CustomerServices {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Stream<List<PropertieModel>> fetchingProperties() {
-    final data = _firestore.collection("properties").snapshots();
+    final data = _firestore
+        .collection("properties")
+        .orderBy("createdAt", descending: true)
+        .snapshots();
 
     return data.map((snapshot) {
       return snapshot.docs.map((doc) {

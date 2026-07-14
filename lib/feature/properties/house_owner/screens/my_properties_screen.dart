@@ -15,6 +15,7 @@ class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("House Owner Dashboard"),
         centerTitle: true,
@@ -25,7 +26,7 @@ class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
         stream: OwnerProperties.fetchingOwnerProperties(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator());
           }
 
           if (snapshot.hasError) {
@@ -33,7 +34,29 @@ class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
           }
 
           if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text("No Property Found"));
+            return Center(
+              child: SizedBox(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.home_work_rounded,
+                      size: 50,
+                      color: Colors.green,
+                    ),
+
+                    Text(
+                      "No properties available yet.",
+                      style: TextStyle(
+                        color: Colors.green.withOpacity(0.9),
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
           }
 
           final data = snapshot.data!;

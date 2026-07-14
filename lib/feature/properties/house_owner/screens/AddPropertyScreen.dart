@@ -4,6 +4,7 @@ import 'package:propertie_explore/core/util/appWidgets/Custome_text_field.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
 import 'package:propertie_explore/feature/properties/house_owner/screens/bottom_bar.dart';
 import 'package:propertie_explore/feature/properties/house_owner/services/services.dart';
+import 'package:propertie_explore/feature/properties/house_owner/widgets/add_screen_widgets/header_add_screen.dart';
 
 class AddPropertyScreen extends StatefulWidget {
   final VoidCallback onPropertyAdd;
@@ -27,47 +28,11 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.lightGreen,
+      backgroundColor: Colors.green,
       body: SafeArea(
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Icon(Icons.arrow_back_sharp, size: 20),
-                  ),
-                ),
-                Text(
-                  "Add Property",
-                  style: GoogleFonts.poppins(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Center(child: Icon(Icons.home, size: 20)),
-                  ),
-                ),
-              ],
-            ),
+            HeaderAddScreen(),
             SizedBox(height: 10),
 
             // Main Container
@@ -108,14 +73,17 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
 
                           //
                           DropdownButtonFormField<String>(
+                            dropdownColor: Colors.white,
                             value: selectedPropertyType,
                             decoration: InputDecoration(
-                              prefixIcon: Icon(Icons.home),
+                              prefixIcon: Icon(Icons.home, color: Colors.green),
                               hintText: "Select Property Type",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(color: Colors.green),
                               ),
+                              focusedBorder: OutlineInputBorder(),
+                              focusColor: Colors.green,
                             ),
                             items: [
                               DropdownMenuItem(

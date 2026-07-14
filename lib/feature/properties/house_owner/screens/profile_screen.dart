@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 const SizedBox(height: 20),
 
-                const CircleAvatar(
+                CircleAvatar(
                   radius: 50,
                   backgroundColor: Colors.white,
                   child: Icon(Icons.person, size: 55, color: Colors.green),
@@ -116,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ButtonText: "Logout",
                           width: 370,
                           height: 60,
-                          ContainerColor: Colors.red,
+                          ContainerColor: Colors.green.shade700,
                           borderRadius: 10,
                           TextColor: Colors.white,
                           fontSize: 20,

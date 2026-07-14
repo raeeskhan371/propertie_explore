@@ -7,32 +7,9 @@ import 'package:propertie_explore/feature/properties/house_owner/model/propertie
 import 'package:propertie_explore/feature/properties/house_owner/services/services.dart';
 
 class UpdatePropertyScreen extends StatefulWidget {
-  // final String ownerName;
-  // final String title;
-  // final String propertyType;
-  // final double area;
-  // final double price;
-  // final int bed;
-  // final int bath;
-  // final String location;
-  // final String description;
-  // final String? id;
   final PropertieModel property;
 
-  UpdatePropertyScreen({
-    super.key,
-    // required this.ownerName,
-    // required this.title,
-    // required this.propertyType,
-    // required this.area,
-    // required this.price,
-    // required this.bed,
-    // required this.bath,
-    // required this.location,
-    // required this.description,
-    // this.id,
-    required this.property,
-  });
+  UpdatePropertyScreen({super.key, required this.property});
 
   @override
   State<UpdatePropertyScreen> createState() => _UpdatePropertyScreenState();
@@ -82,14 +59,19 @@ class _UpdatePropertyScreenState extends State<UpdatePropertyScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(100),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(100),
+                    ),
+                    child: const Icon(Icons.arrow_back_sharp),
                   ),
-                  child: const Icon(Icons.arrow_back_sharp),
                 ),
                 Text(
                   "Update Property",

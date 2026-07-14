@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:propertie_explore/feature/properties/house_owner/model/propertie_model.dart';
 
-class PropertyDetailsScreen extends StatelessWidget {
-  const PropertyDetailsScreen({super.key});
+class PropertyDetailsScreen extends StatefulWidget {
+  PropertieModel propertyData;
+  PropertyDetailsScreen({super.key, required this.propertyData});
 
+  @override
+  State<PropertyDetailsScreen> createState() => _PropertyDetailsScreenState();
+}
+
+class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Property Details")),
+      appBar: AppBar(title: const Text("Property Details"), centerTitle: true),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -18,79 +25,141 @@ class PropertyDetailsScreen extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(16),
               ),
-              child: const Center(child: Icon(Icons.image, size: 60)),
+              child: const Icon(Icons.home, size: 80, color: Colors.grey),
             ),
 
             const SizedBox(height: 20),
 
-            // Title & Price
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "5 Marla Luxury House",
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    "PKR 1,50,00,000",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
+            // Title
+            Text(
+              widget.propertyData.title,
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
             ),
 
-            const SizedBox(height: 20),
-
-            // Property Info
-            Row(
-              children: [
-                Expanded(child: infoCard("Area", "5 Marla")),
-                const SizedBox(width: 12),
-                Expanded(child: infoCard("Type", "House")),
-              ],
-            ),
-
-            const SizedBox(height: 12),
-
-            Row(
-              children: [
-                Expanded(child: infoCard("Bedrooms", "4")),
-                const SizedBox(width: 12),
-                Expanded(child: infoCard("Bathrooms", "3")),
-              ],
-            ),
-
-            const SizedBox(height: 20),
+            const SizedBox(height: 8),
 
             // Location
-            const Text(
-              "Location",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Row(
+              children: [
+                Icon(Icons.location_on, color: Colors.red),
+                SizedBox(width: 5),
+                Expanded(
+                  child: Text(
+                    widget.propertyData.location,
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ),
+              ],
             ),
 
-            const SizedBox(height: 10),
+            const SizedBox(height: 20),
 
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
+            // Price
+            Text(
+              widget.propertyData.price.toString(),
+              style: TextStyle(
+                fontSize: 30,
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
               ),
-              child: const Text("Hayatabad Phase 7, Peshawar"),
+            ),
+
+            const SizedBox(height: 20),
+
+            // Bed Bath Area
+            Row(
+              children: [
+                Expanded(
+                  child: Card(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 18),
+                      child: Column(
+                        children: [
+                          Icon(Icons.bed, color: Colors.green, size: 30),
+                          SizedBox(height: 8),
+                          Text(
+                            widget.propertyData.bed.toString(),
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 18),
+                      child: Column(
+                        children: [
+                          Icon(Icons.bathtub, color: Colors.green, size: 30),
+                          SizedBox(height: 8),
+                          Text(
+                            widget.propertyData.bath.toString(),
+
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 18),
+                      child: Column(
+                        children: [
+                          Icon(
+                            Icons.square_foot,
+                            color: Colors.green,
+                            size: 30,
+                          ),
+                          SizedBox(height: 8),
+                          Text(
+                            widget.propertyData.area.toString(),
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 25),
+
+            // Property Type
+            const Text(
+              "Property Type",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            const SizedBox(height: 8),
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.home_work, color: Colors.green),
+                title: Text(widget.propertyData.propertyType),
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            // Owner
+            const Text(
+              "Owner",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            const SizedBox(height: 8),
+            Card(
+              child: ListTile(
+                leading: const CircleAvatar(child: Icon(Icons.person)),
+                title: Text(widget.propertyData.ownerName),
+              ),
             ),
 
             const SizedBox(height: 20),
@@ -98,54 +167,50 @@ class PropertyDetailsScreen extends StatelessWidget {
             // Description
             const Text(
               "Description",
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
 
             const SizedBox(height: 10),
 
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Text(
+                  widget.propertyData.description,
+                  style: TextStyle(fontSize: 15, height: 1.5),
+                ),
               ),
-              child: const Text(
-                "A beautiful modern house located near the main road with all facilities available.",
+            ),
+
+            const SizedBox(height: 20),
+
+            // Posted Date
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.calendar_today, color: Colors.green),
+                title: const Text("Posted On"),
+                subtitle: Text(
+                  widget.propertyData.createdAt!.toDate().toString(),
+                ),
               ),
             ),
 
             const SizedBox(height: 30),
 
+            // Contact Button
             SizedBox(
               width: double.infinity,
+              height: 55,
               child: ElevatedButton(
                 onPressed: () {},
-                child: const Text("Contact Owner"),
+                child: const Text(
+                  "Contact Owner",
+                  style: TextStyle(fontSize: 18),
+                ),
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  static Widget infoCard(String title, String value) {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 18),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade100,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Column(
-        children: [
-          Text(title, style: const TextStyle(color: Colors.grey)),
-          const SizedBox(height: 8),
-          Text(
-            value,
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
-          ),
-        ],
       ),
     );
   }
