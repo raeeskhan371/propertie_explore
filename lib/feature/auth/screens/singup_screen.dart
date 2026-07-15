@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
 import 'package:propertie_explore/core/widgets/custome_Textfield.dart';
+import 'package:propertie_explore/feature/auth/provider/auth_provider.dart';
 import 'package:propertie_explore/feature/auth/screens/login_screen.dart';
-import 'package:propertie_explore/feature/auth/services/auth_services.dart';
+import 'package:provider/provider.dart';
 
 class SingupScreen extends StatefulWidget {
   const SingupScreen({super.key});
@@ -158,38 +159,53 @@ class _SingupScreenState extends State<SingupScreen> {
                     ),
 
                     SizedBox(height: 10),
-                    AppElevatedButton(
-                      child: Text("SingUp"),
-                      width: double.infinity,
-                      height: 50,
-                      ContainerColor: Colors.green.shade700,
-                      borderRadius: 10,
-                      TextColor: Colors.white,
-                      fontSize: 20,
-                      onPressed: () async {
-                        // These prints Are For Cheacking the TextFields and Selcted Role
-                        print("Singup Button Pressed Button Presssed");
-                        print("${nameController.text}");
-                        print("${emailController.text}");
-                        print("${passwordController.text}");
-                        print("${confrimPasswordController.text}");
-                        print("$SelectedRole");
-                        AuthFireBaseServices user = AuthFireBaseServices();
-                        await user.userSinup(
-                          name: nameController.text,
-                          email: emailController.text,
-                          password: passwordController.text,
-                          role: SelectedRole,
-                        );
-                        dispose();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => LoginScreen(),
-                          ),
+
+                    Consumer<AuthProvider>(
+                      builder: (context, provider, child) {
+                        return AppElevatedButton(
+                          width: double.infinity,
+                          height: 50,
+                          ContainerColor: Colors.green.shade700,
+                          borderRadius: 10,
+                          TextColor: Colors.white,
+                          fontSize: 20,
+                          child: provider.isLoading
+                              ? CircularProgressIndicator(color: Colors.white)
+                              : Text(
+                                  "SingUp",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                          onPressed: () async {
+                            // These prints Are For Cheacking the TextFields and Selcted Role
+                            print("Singup Button Pressed Button Presssed");
+                            print("${nameController.text}");
+                            print("${emailController.text}");
+                            print("${passwordController.text}");
+                            print("${confrimPasswordController.text}");
+                            print("$SelectedRole");
+
+                            await context.read<AuthProvider>().userSingUp(
+                              name: nameController.text,
+                              email: emailController.text,
+                              password: passwordController.text,
+                              role: SelectedRole,
+                            );
+                            dispose();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginScreen(),
+                              ),
+                            );
+                          },
                         );
                       },
                     ),
+
                     const SizedBox(height: 10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
