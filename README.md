@@ -11,8 +11,8 @@ A modern Flutter-based real estate application built with **Flutter**, **Provide
 ## Authentication
 
 <p align="center">
-  <img src="screenshots/splash_screen.jpg" width="220"/>
-  <img src="screenshots/login_screen.jpg" width="220"/>
+  <img src="assets/screenshots/splash_screen.jpg" width="220"/>
+  <img src="assets/screenshots/splash_screen.jpg" width="220"/>
   <img src="screenshots/singup_screen.jpg" width="220"/>
 </p>
 
