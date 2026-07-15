@@ -12,28 +12,28 @@ A modern Flutter-based real estate application built with **Flutter**, **Provide
 
 <p align="center">
   <img src="assets/screenshots/splash_screen.jpg" width="220"/>
-  <img src="assets/screenshots/splash_screen.jpg" width="220"/>
-  <img src="screenshots/singup_screen.jpg" width="220"/>
+  <img src="assets/screenshots/singup_screen.jpg" width="220"/>
+  <img src="assets/screenshots/login_screen.jpg" width="220"/>
 </p>
 
 ## Customer
 
 <p align="center">
-  <img src="screenshots/property_explore_screen.jpg" width="250"/>
+  <img src="assets/screenshots/property_explore_screen.jpg" width="250"/>
 </p>
 
 ## House Owner
 
 <p align="center">
-  <img src="screenshots/owner_dashboard_screen.jpg" width="220"/>
-  <img src="screenshots/add_property_screen.jpg" width="220"/>
-  <img src="screenshots/update_property_screen.jpg" width="220"/>
+  <img src="assets/screenshots/owner_dashboard_screen.jpg" width="220"/>
+  <img src="assets/screenshots/add_property_screen.jpg" width="220"/>
+  <img src="assets/screenshots/update_property_screen.jpg" width="220"/>
 </p>
 
 ## Profile
 
 <p align="center">
-  <img src="screenshots/profile_screen.jpg" width="250"/>
+  <img src="assets/screenshots/profile_screen.jpg" width="250"/>
 </p>
 
 ---
