@@ -1,67 +1,77 @@
 # 🏡 Property Explore
 
-A modern Flutter-based real estate application built with **Flutter**, **Provider**, and **Firebase**. The app allows **House Owners** to manage property listings and **Customers** to explore available properties through a clean and responsive interface.
+<p align="center">
+  <img src="assets/images/app_logo.png" width="120"/>
+</p>
 
-> ✅ **MVP Version 1 Completed**
+<h1 align="center">Property Explore</h1>
+
+<p align="center">
+A modern real estate application built with <b>Flutter</b>, <b>Provider</b>, and <b>Firebase</b>.
+</p>
+
+<p align="center">
+
+![Flutter](https://img.shields.io/badge/Flutter-3.x-blue?logo=flutter)
+![Firebase](https://img.shields.io/badge/Firebase-Backend-orange?logo=firebase)
+![Provider](https://img.shields.io/badge/State%20Management-Provider-green)
+![Platform](https://img.shields.io/badge/Platform-Android-success)
+
+</p>
+
+<p align="center">
+<b>🏠 House Owner • 👤 Customer • 🔥 Firebase • 📱 Flutter</b>
+</p>
 
 ---
 
 # 📸 Application Preview
 
-## Authentication
-
 <p align="center">
-  <img src="assets/screenshots/splash_screen.jpg" width="220"/>
-  <img src="assets/screenshots/singup_screen.jpg" width="220"/>
-  <img src="assets/screenshots/login_screen.jpg" width="220"/>
+<img src="assets/screenshots/splash_screen.jpg" width="180"/>
+<img src="assets/screenshots/login_screen.jpg" width="180"/>
+<img src="assets/screenshots/singup_screen.jpg" width="180"/>
+<img src="assets/screenshots/property_explore_screen.jpg" width="180"/>
 </p>
 
-## Customer
-
 <p align="center">
-  <img src="assets/screenshots/property_explore_screen.jpg" width="250"/>
-</p>
-
-## House Owner
-
-<p align="center">
-  <img src="assets/screenshots/owner_dashboard_screen.jpg" width="220"/>
-  <img src="assets/screenshots/add_property_screen.jpg" width="220"/>
-  <img src="assets/screenshots/update_property_screen.jpg" width="220"/>
-</p>
-
-## Profile
-
-<p align="center">
-  <img src="assets/screenshots/profile_screen.jpg" width="250"/>
+<img src="assets/screenshots/owner_dashboard_screen.jpg" width="180"/>
+<img src="assets/screenshots/add_property_screen.jpg" width="180"/>
+<img src="assets/screenshots/update_property_screen.jpg" width="180"/>
+<img src="assets/screenshots/profile_screen.jpg" width="180"/>
 </p>
 
 ---
 
 # ✨ Features
 
-### 🔐 Authentication
+## 🔐 Authentication
+
 - Login
 - Sign Up
 - Forgot Password
 - Firebase Authentication
-- Role-Based Authentication (House Owner & Customer)
+- Role-Based Authentication
 
-### 🏠 House Owner
+## 🏠 House Owner
+
 - Add Property
 - Update Property
 - Delete Property
-- View My Properties
+- Manage My Properties
 - Owner Dashboard
 
-### 👤 Customer
-- Browse Available Properties
-- View Property Listings
+## 👤 Customer
 
-### 🔥 Firebase
+- Browse Properties
+- Explore Listings
+- Responsive Property Cards
+
+## 🔥 Firebase
+
 - Firebase Authentication
 - Cloud Firestore
-- Real-Time Property Fetching
+- Real-Time Data Fetching
 
 ---
 
@@ -69,21 +79,21 @@ A modern Flutter-based real estate application built with **Flutter**, **Provide
 
 - Flutter
 - Dart
+- Provider
 - Firebase Authentication
 - Cloud Firestore
-- Provider
 - Google Fonts
 
 ---
 
 # 🏗 Architecture
 
-- Feature-Based Folder Structure
+- Feature-Based Architecture
 - Provider State Management
 - Service Layer
 - Model Layer
 - Reusable Widgets
-- Clean Architecture Principles
+- Clean & Scalable Folder Structure
 
 ---
 
@@ -99,8 +109,8 @@ lib
 ├── feature
 │   ├── auth
 │   ├── properties
-│   │    ├── Owner
-│   │    └── Customer
+│   │   ├── Owner
+│   │   └── Customer
 │   │
 │   └── ...
 │
@@ -109,20 +119,32 @@ lib
 
 ---
 
+# 🚀 MVP Version 1
+
+- ✅ Firebase Authentication
+- ✅ Role-Based Login
+- ✅ Property CRUD
+- ✅ Owner Dashboard
+- ✅ Customer Property Listing
+- ✅ Provider State Management
+- ✅ Firestore Integration
+
+---
+
 # 🚀 Version 2 Roadmap
 
-- Multiple Property Images (Cloudinary)
-- Property Details Screen
-- Search Properties
-- Advanced Filters
-- Favorite Properties
-- Google Maps Integration
-- Contact Property Owner
-- Push Notifications
-- Pagination
-- Firebase Security Rules
-- Repository Pattern
-- Improved UI & UX
+- 📸 Multiple Property Images (Cloudinary)
+- 🏠 Property Details Screen
+- 🔍 Search Properties
+- 🎯 Advanced Filters
+- ❤️ Favorite Properties
+- 📍 Google Maps Integration
+- 📞 Contact Property Owner
+- 🔔 Push Notifications
+- 📄 Pagination
+- 🔐 Firebase Security Rules
+- 🗂 Repository Pattern
+- ✨ UI/UX Improvements
 
 ---
 
@@ -142,26 +164,18 @@ flutter run
 
 ---
 
-# 🎯 MVP Version 1
-
-- ✅ Firebase Authentication
-- ✅ Role-Based Authentication
-- ✅ Property CRUD
-- ✅ Owner Dashboard
-- ✅ Customer Property Listing
-- ✅ Provider State Management
-- ✅ Firestore Integration
-
----
-
 # 👨‍💻 Developer
 
-**Raees Khan**
+### Raees Khan
 
 Flutter Developer
 
-GitHub: https://github.com/raeeskhan371
+GitHub: **https://github.com/raeeskhan371**
 
 ---
 
-## ⭐ If you like this project, don't forget to give it a Star.
+<p align="center">
+
+⭐ If you like this project, please consider giving it a star!
+
+</p>
