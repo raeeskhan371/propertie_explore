@@ -18,6 +18,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,11 +83,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       prefixIcon: Icons.email,
                     ),
                     const SizedBox(height: 15),
-                    AppTextformField(
-                      prefixIcon: Icons.lock,
-                      controller: passwordController,
-                      hintText: "Enter Your Password",
-                      suffix: Icons.visibility,
+
+                    Consumer<AuthProvider>(
+                      builder: (context, provider, child) {
+                        return AppTextformField(
+                          obscureText: provider.isPasswordHidden,
+                          prefixIcon: Icons.lock,
+                          controller: passwordController,
+                          hintText: "Enter Your Password",
+                          suffix: IconButton(
+                            onPressed: () {
+                              provider.visibilityTogle();
+                            },
+                            icon: Icon(
+                              provider.isPasswordHidden
+                                  ? Icons.visibility_off
+                                  : Icons.visibility,
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
+                      },
                     ),
 
                     const SizedBox(height: 20),

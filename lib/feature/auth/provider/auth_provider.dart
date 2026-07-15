@@ -7,6 +7,14 @@ class AuthProvider with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  bool _isPasswordHidden = true;
+  bool get isPasswordHidden => _isPasswordHidden;
+
+  void visibilityTogle() {
+    _isPasswordHidden = !_isPasswordHidden;
+    notifyListeners();
+  }
+
   void setLoading(bool value) {
     _isLoading = value;
     notifyListeners();

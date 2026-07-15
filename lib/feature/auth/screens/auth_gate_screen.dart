@@ -27,6 +27,11 @@ class _AuthGateScreenState extends State<AuthGateScreen> {
           return FutureBuilder(
             future: AuthFireBaseServices().userCheck(),
             builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Scaffold(
+                  body: Center(child: CircularProgressIndicator()),
+                );
+              }
               if (snapshot.data == "houseOwner") {
                 return OwnerBottomBar();
               }

@@ -46,10 +46,14 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                 width: double.infinity,
 
                 decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20),
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color(0xFFFFFFFF),
+                      Color(0xFFE8F5E9),
+                      Color(0xFFC8E6C9),
+                    ],
                   ),
                 ),
                 child: SingleChildScrollView(
@@ -150,7 +154,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                             icon: Icons.description,
                             controller: descController,
                           ),
-                          SizedBox(height: 30),
+                          SizedBox(height: 10),
                           Consumer<OwnerPropertyProvider>(
                             builder: (context, provider, child) {
                               return AppElevatedButton(

@@ -14,7 +14,7 @@ class HeaderAddScreen extends StatelessWidget {
           width: 50,
           height: 50,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.green,
             borderRadius: BorderRadius.circular(100),
           ),
           child: Padding(
@@ -24,7 +24,11 @@ class HeaderAddScreen extends StatelessWidget {
                 onBack();
               },
 
-              child: Icon(Icons.arrow_back_sharp, size: 20),
+              child: Icon(
+                Icons.arrow_back_ios_new,
+                color: Colors.white,
+                size: 20,
+              ),
             ),
           ),
         ),
@@ -40,12 +44,14 @@ class HeaderAddScreen extends StatelessWidget {
           width: 50,
           height: 50,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Colors.green,
             borderRadius: BorderRadius.circular(100),
           ),
           child: Padding(
             padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Center(child: Icon(Icons.home, size: 20)),
+            child: Center(
+              child: Icon(Icons.home, size: 20, color: Colors.green),
+            ),
           ),
         ),
       ],

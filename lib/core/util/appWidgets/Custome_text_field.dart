@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomTextField extends StatelessWidget {
   final String hint;
   final IconData icon;
   final TextEditingController controller;
+  final bool isVisible = false;
 
   const CustomTextField({
     super.key,
@@ -30,6 +32,11 @@ class CustomTextField extends StatelessWidget {
         controller: controller,
         decoration: InputDecoration(
           hintText: hint,
+          hintStyle: GoogleFonts.poppins(
+            color: Colors.green,
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+          ),
           prefixIcon: Container(
             margin: const EdgeInsets.all(10),
             decoration: BoxDecoration(

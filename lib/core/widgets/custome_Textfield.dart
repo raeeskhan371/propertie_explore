@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AppTextformField extends StatelessWidget {
+class AppTextformField extends StatefulWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final String? hintText;
@@ -12,7 +12,7 @@ class AppTextformField extends StatelessWidget {
   final int? maxline;
   final bool readOnly;
   final List<TextInputFormatter>? inputformatter;
-  final IconData? suffix;
+  final Widget? suffix;
   final TextCapitalization textCap;
 
   const AppTextformField({
@@ -31,6 +31,11 @@ class AppTextformField extends StatelessWidget {
   });
 
   @override
+  State<AppTextformField> createState() => _AppTextformFieldState();
+}
+
+class _AppTextformFieldState extends State<AppTextformField> {
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
       cursorColor: Colors.white,
@@ -39,19 +44,24 @@ class AppTextformField extends StatelessWidget {
         color: Colors.white,
         fontWeight: FontWeight.w300,
       ),
-      controller: controller,
-      obscureText: obscureText,
-      readOnly: readOnly,
-      inputFormatters: inputformatter,
-      textCapitalization: textCap,
+      controller: widget.controller,
+      obscureText: widget.obscureText,
+      readOnly: widget.readOnly,
+      inputFormatters: widget.inputformatter,
+      textCapitalization: widget.textCap,
 
       decoration: InputDecoration(
-        suffixIcon: Icon(suffix, color: Colors.white),
-        hintText: hintText,
-        hintStyle: TextStyle(color: Colors.white),
+        suffixIcon: widget.suffix,
+        hintText: widget.hintText,
+        hintStyle: GoogleFonts.poppins(
+          color: Colors.white,
+          fontSize: 15,
+          fontWeight: FontWeight.w500,
+        ),
+
         prefixIcon: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 13),
-          child: Icon(prefixIcon, size: 22, color: Colors.white),
+          child: Icon(widget.prefixIcon, size: 22, color: Colors.white),
         ),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.white),

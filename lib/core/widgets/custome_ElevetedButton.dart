@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 class AppElevatedButton extends StatelessWidget {
   final VoidCallback onPressed;
   final Widget child;
-
   final double width;
   final double height;
   final double borderRadius;
