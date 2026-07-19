@@ -29,7 +29,7 @@ class PropertyOwnerTile extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/images/house.jpg"),
+                image: NetworkImage("${property.imageUrl}"),
                 fit: BoxFit.cover,
               ),
               color: Colors.grey.shade300,

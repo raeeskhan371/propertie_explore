@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/services/owner_cloudnary_services.dart';
 
 class OwnerPropertyServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final OwnerCloudnaryServices _cloudinaryService = OwnerCloudnaryServices();
 
   Future<void> addProperty({
     required String ownerName,
@@ -17,8 +21,15 @@ class OwnerPropertyServices {
     required int bath,
     required String location,
     required String description,
+
+    // this file is image file which is provided by user
+    required File imageFile,
   }) async {
     final uid = await _auth.currentUser!.uid;
+    // in this imageUrl is store of cloudnaryservices url whihc soon provided to firebase to store
+    // imageFIle is comefrom user and this function conver image into url
+
+    final String ImageUrl = await _cloudinaryService.uploadImages(imageFile);
 
     final propertyModel = PropertieModel(
       ownerName: ownerName,
@@ -31,6 +42,8 @@ class OwnerPropertyServices {
       location: location,
       description: description,
       ownerID: uid,
+      // this  is  the imageurl provided by cloudnary services
+      imageUrl: ImageUrl,
     );
 
     await _firestore.collection("properties").doc().set(propertyModel.toMap());
@@ -191,6 +204,7 @@ class OwnerPropertyServices {
         location: location,
         description: description,
         ownerID: uid,
+        imageUrl: "",
       );
       await _firestore
           .collection("properties")

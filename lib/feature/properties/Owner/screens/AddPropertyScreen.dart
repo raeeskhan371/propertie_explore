@@ -154,6 +154,21 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                             icon: Icons.description,
                             controller: descController,
                           ),
+
+                          GestureDetector(
+                            onTap: () {
+                              context
+                                  .read<OwnerPropertyProvider>()
+                                  .pickPopertyImage();
+                            },
+                            child: Container(
+                              height: 100,
+                              width: 100,
+
+                              color: Colors.blue,
+                            ),
+                          ),
+
                           SizedBox(height: 10),
                           Consumer<OwnerPropertyProvider>(
                             builder: (context, provider, child) {
@@ -179,6 +194,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
 
                                 onPressed: () async {
                                   try {
+                                    print(provider.selectedImage?.path);
                                     await context
                                         .read<OwnerPropertyProvider>()
                                         .addProperty(
@@ -196,7 +212,9 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                                           bath: int.parse(bathController.text),
                                           location: locationController.text,
                                           description: descController.text,
+                                          imageFile: provider.selectedImage!,
                                         );
+
                                     widget.onPropertyAdd();
                                   } catch (e) {
                                     ScaffoldMessenger.of(context).showSnackBar(

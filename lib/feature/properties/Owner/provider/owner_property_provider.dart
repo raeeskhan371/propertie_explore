@@ -1,16 +1,30 @@
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/services/owner_imager_picker.dart';
 import 'package:propertie_explore/feature/properties/Owner/services/owner_property_services.dart';
 
 class OwnerPropertyProvider with ChangeNotifier {
   final OwnerPropertyServices _propertyServices = OwnerPropertyServices();
-
+  final OwnerImagerPicker _imagerPicker = OwnerImagerPicker();
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
+  File? _selectedImage;
+  File? get selectedImage => _selectedImage;
+
   void setLoading(bool value) {
     _isLoading = value;
+    notifyListeners();
+  }
+
+  Future<void> pickPopertyImage() async {
+    final image = await _imagerPicker.pickImageFromGallerty();
+    if (image == null) return;
+    _selectedImage = image;
     notifyListeners();
   }
 
@@ -24,6 +38,7 @@ class OwnerPropertyProvider with ChangeNotifier {
     required int bath,
     required String location,
     required String description,
+    required File imageFile,
   }) async {
     setLoading(true);
     try {
@@ -37,6 +52,7 @@ class OwnerPropertyProvider with ChangeNotifier {
         bath: bath,
         location: location,
         description: description,
+        imageFile: imageFile,
       );
     } catch (e) {
       rethrow;
