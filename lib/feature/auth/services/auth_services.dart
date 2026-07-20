@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/services/owner_cloudnary_services.dart';
 
 class AuthFireBaseServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final OwnerCloudnaryServices _cloudnaryServices = OwnerCloudnaryServices();
 
   /// Create User Fucntion
 
@@ -14,6 +18,7 @@ class AuthFireBaseServices {
     required String email,
     required String password,
     required String role,
+    File? profileImage,
   }) async {
     // user Create
     try {
@@ -22,9 +27,19 @@ class AuthFireBaseServices {
 
       final uid = userCredential.user!.uid;
 
-      // saving data in firestore (Save Data in Database)
+      String? imageUrl;
 
-      final user = UserModel(name: name, email: email, role: role);
+      if (profileImage != null) {
+        imageUrl = await _cloudnaryServices.uploadImages(profileImage);
+      }
+
+      // saving data in firestore (Save Data in Database)
+      final user = UserModel(
+        name: name,
+        email: email,
+        role: role,
+        imageUrl: imageUrl,
+      );
 
       await _firestore.collection("Users").doc(uid).set(user.toMap());
     } on FirebaseAuthException catch (e) {

@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
+import 'package:propertie_explore/feature/properties/Owner/services/owner_imager_picker.dart';
 
 class AuthProvider with ChangeNotifier {
   final AuthFireBaseServices _authservices = AuthFireBaseServices();
+  final OwnerImagerPicker _imagerPicker = OwnerImagerPicker();
+  File? _selectedImage;
+  File? get selectedImage => _selectedImage;
   bool _isLoading = false;
   bool get isLoading => _isLoading;
-
   bool _isPasswordHidden = true;
   bool get isPasswordHidden => _isPasswordHidden;
 
@@ -20,11 +25,23 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> profileImage() async {
+    final image = await _imagerPicker.pickImageFromGallery();
+
+    if (image == null) {
+      return;
+    } else {
+      _selectedImage = image;
+      notifyListeners();
+    }
+  }
+
   Future<void> userSingUp({
     required String name,
     required String email,
     required String password,
     required String role,
+    required File profileImage,
   }) async {
     setLoading(true);
 
@@ -34,6 +51,7 @@ class AuthProvider with ChangeNotifier {
         email: email,
         password: password,
         role: role,
+        profileImage: profileImage,
       );
     } catch (e) {
       rethrow;

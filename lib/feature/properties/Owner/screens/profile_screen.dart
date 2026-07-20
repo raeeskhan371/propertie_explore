@@ -54,10 +54,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 const SizedBox(height: 20),
 
-                CircleAvatar(
-                  radius: 50,
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.person, size: 55, color: Colors.green),
+                FutureBuilder(
+                  future: context.read<OwnerPropertyProvider>().userFetching(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                        child: CircularProgressIndicator(color: Colors.green),
+                      );
+                    }
+                    if (!snapshot.hasData) {
+                      return Center(child: Text("SomeThing Wrong!"));
+                    }
+
+                    final data = snapshot.data!;
+                    return Container(
+                      height: 150,
+                      width: 150,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        image: DecorationImage(
+                          image: NetworkImage("${data.imageUrl}"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    );
+                  },
                 ),
 
                 const SizedBox(height: 15),

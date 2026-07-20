@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTextformField extends StatefulWidget {
+  final VoidCallback? onPressed;
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final String? hintText;
@@ -28,6 +29,7 @@ class AppTextformField extends StatefulWidget {
     this.inputformatter,
     this.suffix,
     this.textCap = TextCapitalization.none,
+    this.onPressed,
   });
 
   @override
@@ -44,6 +46,7 @@ class _AppTextformFieldState extends State<AppTextformField> {
         color: Colors.white,
         fontWeight: FontWeight.w300,
       ),
+      onTap: widget.onPressed,
       controller: widget.controller,
       obscureText: widget.obscureText,
       readOnly: widget.readOnly,

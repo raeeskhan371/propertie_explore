@@ -192,6 +192,20 @@ class _SingupScreenState extends State<SingupScreen> {
 
                     SizedBox(height: 10),
 
+                    AppTextformField(
+                      onPressed: () {
+                        context.read<AuthProvider>().profileImage();
+                      },
+                      readOnly: true,
+                      hintText: "Upload Image",
+                      suffix: Icon(
+                        Icons.picture_in_picture,
+                        color: Colors.white,
+                      ),
+                    ),
+
+                    SizedBox(height: 10),
+
                     Consumer<AuthProvider>(
                       builder: (context, provider, child) {
                         return AppElevatedButton(
@@ -225,8 +239,9 @@ class _SingupScreenState extends State<SingupScreen> {
                               email: emailController.text,
                               password: passwordController.text,
                               role: SelectedRole,
+                              profileImage: provider.selectedImage!,
                             );
-                            dispose();
+
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(

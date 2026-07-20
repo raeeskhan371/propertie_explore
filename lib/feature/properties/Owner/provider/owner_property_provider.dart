@@ -22,7 +22,7 @@ class OwnerPropertyProvider with ChangeNotifier {
   }
 
   Future<void> pickPopertyImage() async {
-    final image = await _imagerPicker.pickImageFromGallerty();
+    final image = await _imagerPicker.pickImageFromGallery();
     if (image == null) return;
     _selectedImage = image;
     notifyListeners();

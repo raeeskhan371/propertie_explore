@@ -21,7 +21,6 @@ class OwnerPropertyServices {
     required int bath,
     required String location,
     required String description,
-
     // this file is image file which is provided by user
     required File imageFile,
   }) async {
