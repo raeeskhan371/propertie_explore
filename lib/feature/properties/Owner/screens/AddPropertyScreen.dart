@@ -4,6 +4,7 @@ import 'package:propertie_explore/core/util/appWidgets/Custome_text_field.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
 import 'package:propertie_explore/feature/properties/Owner/widgets/add_screen_widgets/header_add_screen.dart';
+import 'package:propertie_explore/feature/properties/Owner/widgets/add_screen_widgets/image_uplaod_container.dart';
 import 'package:provider/provider.dart';
 
 class AddPropertyScreen extends StatefulWidget {
@@ -37,7 +38,6 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                 widget.onPropertyAdd();
               },
             ),
-            SizedBox(height: 10),
 
             // Main Container
             Expanded(
@@ -66,16 +66,13 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                     child: SizedBox(
                       child: Column(
                         children: [
-                          CustomTextField(
-                            hint: "Owner Name",
-                            icon: Icons.person,
-                            controller: OwnerController,
-                          ),
+                          UploadImageContainer(),
                           SizedBox(height: 10),
                           CustomTextField(
                             hint: "Title",
                             icon: Icons.title,
                             controller: titleController,
+                            textCap: TextCapitalization.words,
                           ),
                           SizedBox(height: 10),
 
@@ -84,14 +81,19 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                             dropdownColor: Colors.white,
                             value: selectedPropertyType,
                             decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
                               prefixIcon: Icon(Icons.home, color: Colors.green),
                               hintText: "Select Property Type",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(15),
                                 borderSide: BorderSide(color: Colors.green),
                               ),
-                              focusedBorder: OutlineInputBorder(),
-                              focusColor: Colors.green,
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.green),
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              focusColor: Colors.white,
                             ),
                             items: [
                               DropdownMenuItem(
@@ -119,28 +121,45 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                           ),
 
                           SizedBox(height: 10),
-                          CustomTextField(
-                            hint: "Area(Marla)",
-                            icon: Icons.scale,
-                            controller: areaController,
+                          Row(
+                            children: [
+                              Expanded(
+                                child: CustomTextField(
+                                  hint: "Area(Marla)",
+                                  icon: Icons.scale,
+                                  controller: areaController,
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Expanded(
+                                child: CustomTextField(
+                                  hint: "Price",
+                                  icon: Icons.price_change,
+                                  controller: priceController,
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(height: 10),
-                          CustomTextField(
-                            hint: "Price",
-                            icon: Icons.price_change,
-                            controller: priceController,
-                          ),
-                          SizedBox(height: 10),
-                          CustomTextField(
-                            hint: "Bedrooms(Bed)",
-                            icon: Icons.bed,
-                            controller: bedController,
-                          ),
-                          SizedBox(height: 10),
-                          CustomTextField(
-                            hint: "Bathrooms(Bath)",
-                            icon: Icons.bathroom,
-                            controller: bathController,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                child: CustomTextField(
+                                  hint: "Bed",
+                                  icon: Icons.bed,
+                                  controller: bedController,
+                                ),
+                              ),
+                              SizedBox(width: 10),
+                              Expanded(
+                                child: CustomTextField(
+                                  hint: "Bath",
+                                  icon: Icons.bathroom,
+                                  controller: bathController,
+                                ),
+                              ),
+                            ],
                           ),
                           SizedBox(height: 10),
                           CustomTextField(
@@ -154,21 +173,6 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                             icon: Icons.description,
                             controller: descController,
                           ),
-
-                          GestureDetector(
-                            onTap: () {
-                              context
-                                  .read<OwnerPropertyProvider>()
-                                  .pickPopertyImage();
-                            },
-                            child: Container(
-                              height: 100,
-                              width: 100,
-
-                              color: Colors.blue,
-                            ),
-                          ),
-
                           SizedBox(height: 10),
                           Consumer<OwnerPropertyProvider>(
                             builder: (context, provider, child) {

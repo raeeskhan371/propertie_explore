@@ -5,6 +5,7 @@ class CustomTextField extends StatelessWidget {
   final String hint;
   final IconData icon;
   final TextEditingController controller;
+  final TextCapitalization textCap;
   final bool isVisible = false;
 
   const CustomTextField({
@@ -12,6 +13,7 @@ class CustomTextField extends StatelessWidget {
     required this.hint,
     required this.icon,
     required this.controller,
+    this.textCap = TextCapitalization.none,
   });
 
   @override
@@ -29,40 +31,38 @@ class CustomTextField extends StatelessWidget {
         ],
       ),
       child: TextFormField(
+        textCapitalization: textCap,
         controller: controller,
         decoration: InputDecoration(
           hintText: hint,
           hintStyle: GoogleFonts.poppins(
             color: Colors.green,
-            fontSize: 15,
+            fontSize: 13,
             fontWeight: FontWeight.w400,
           ),
           prefixIcon: Container(
-            margin: const EdgeInsets.all(10),
+            margin: const EdgeInsets.all(5),
             decoration: BoxDecoration(
               color: const Color(0xffF3F8F3),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: Icon(icon, color: const Color(0xff4CAF50)),
+            child: Icon(icon, color: const Color(0xff4CAF50), size: 14),
           ),
           filled: true,
           fillColor: Colors.white,
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide.none,
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(10),
             borderSide: BorderSide.none,
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(18),
-            borderSide: const BorderSide(color: Color(0xff4CAF50), width: 1.5),
+            borderRadius: BorderRadius.circular(10),
+            borderSide: BorderSide(color: Color(0xff4CAF50), width: 1.5),
           ),
-          contentPadding: const EdgeInsets.symmetric(
-            horizontal: 18,
-            vertical: 22,
-          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 18, vertical: 22),
         ),
       ),
     );

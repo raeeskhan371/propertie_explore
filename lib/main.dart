@@ -2,8 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/provider/auth_provider.dart';
 import 'package:propertie_explore/feature/auth/screens/auth_gate_screen.dart';
-import 'package:propertie_explore/feature/auth/screens/splash_screen.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
+import 'package:propertie_explore/feature/properties/Owner/screens/AddPropertyScreen.dart';
 import 'package:propertie_explore/firebase_options.dart';
 import 'package:provider/provider.dart';
 
