@@ -22,13 +22,15 @@ class OwnerPropertyServices {
     required String location,
     required String description,
     // this file is image file which is provided by user
-    required File imageFile,
+    required List<File> imageFile,
   }) async {
     final uid = await _auth.currentUser!.uid;
     // in this imageUrl is store of cloudnaryservices url whihc soon provided to firebase to store
     // imageFIle is comefrom user and this function conver image into url
 
-    final String ImageUrl = await _cloudinaryService.uploadImages(imageFile);
+    final List<String> ImageUrl = await _cloudinaryService.uploadImages(
+      imageFile,
+    );
 
     final propertyModel = PropertieModel(
       ownerName: ownerName,
@@ -42,7 +44,7 @@ class OwnerPropertyServices {
       description: description,
       ownerID: uid,
       // this  is  the imageurl provided by cloudnary services
-      imageUrl: ImageUrl,
+      imageUrls: ImageUrl,
     );
 
     await _firestore.collection("properties").doc().set(propertyModel.toMap());
@@ -203,7 +205,7 @@ class OwnerPropertyServices {
         location: location,
         description: description,
         ownerID: uid,
-        imageUrl: "",
+        imageUrls: [],
       );
       await _firestore
           .collection("properties")

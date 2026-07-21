@@ -4,12 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
+import 'package:propertie_explore/feature/auth/services/auth_cloudnary_services.dart';
 import 'package:propertie_explore/feature/properties/Owner/services/owner_cloudnary_services.dart';
 
 class AuthFireBaseServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final OwnerCloudnaryServices _cloudnaryServices = OwnerCloudnaryServices();
+  final AuthCloudnaryServices _cloudnaryServices = AuthCloudnaryServices();
 
   /// Create User Fucntion
 
@@ -30,7 +31,7 @@ class AuthFireBaseServices {
       String? imageUrl;
 
       if (profileImage != null) {
-        imageUrl = await _cloudnaryServices.uploadImages(profileImage);
+        imageUrl = await _cloudnaryServices.profileimage(profileImage);
       }
 
       // saving data in firestore (Save Data in Database)

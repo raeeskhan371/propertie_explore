@@ -2,12 +2,13 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:propertie_explore/feature/auth/services/auth_image_picker_services.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
 import 'package:propertie_explore/feature/properties/Owner/services/owner_imager_picker.dart';
 
 class AuthProvider with ChangeNotifier {
   final AuthFireBaseServices _authservices = AuthFireBaseServices();
-  final OwnerImagerPicker _imagerPicker = OwnerImagerPicker();
+  final AuthImagePickerServices _imagerPicker = AuthImagePickerServices();
   File? _selectedImage;
   File? get selectedImage => _selectedImage;
   bool _isLoading = false;
@@ -26,7 +27,7 @@ class AuthProvider with ChangeNotifier {
   }
 
   Future<void> profileImage() async {
-    final image = await _imagerPicker.pickImageFromGallery();
+    final image = await _imagerPicker.profileImagePicker();
 
     if (image == null) {
       return;

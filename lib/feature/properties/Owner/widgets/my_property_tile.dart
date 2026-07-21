@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/update_screen.dart';
@@ -29,11 +30,32 @@ class PropertyOwnerTile extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage("${property.imageUrl}"),
+                image: NetworkImage("${property.imageUrls}"),
                 fit: BoxFit.cover,
               ),
               color: Colors.grey.shade300,
               borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+            ),
+            child: CarouselSlider.builder(
+              itemCount: property.imageUrls.length,
+              itemBuilder: (context, index, realIndex) {
+                return ClipRRect(
+                  borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(16),
+                  ),
+                  child: Image.network(
+                    property.imageUrls[index],
+                    width: double.infinity,
+                    height: 220,
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
+              options: CarouselOptions(
+                height: 220,
+                viewportFraction: 1,
+                autoPlay: true,
+              ),
             ),
           ),
 

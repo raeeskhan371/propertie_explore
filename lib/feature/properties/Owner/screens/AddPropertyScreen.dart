@@ -194,7 +194,6 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
 
                                 onPressed: () async {
                                   try {
-                                    print(provider.selectedImage?.path);
                                     await context
                                         .read<OwnerPropertyProvider>()
                                         .addProperty(
@@ -212,7 +211,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                                           bath: int.parse(bathController.text),
                                           location: locationController.text,
                                           description: descController.text,
-                                          imageFile: provider.selectedImage!,
+                                          imageFile: provider.selectedImage,
                                         );
 
                                     widget.onPropertyAdd();

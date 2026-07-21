@@ -5,13 +5,13 @@ import 'package:image_picker/image_picker.dart';
 class OwnerImagerPicker {
   final ImagePicker _picker = ImagePicker();
 
-  Future<File?> pickImageFromGallery() async {
-    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+  Future<List<File>> pickImageFromGallery() async {
+    final List<XFile> images = await _picker.pickMultiImage();
 
-    if (image == null) {
-      return null;
+    if (images.isEmpty) {
+      return [];
     } else {
-      return File(image.path);
+      return images.map((image) => File(image.path)).toList();
     }
   }
 }

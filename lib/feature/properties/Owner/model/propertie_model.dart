@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class PropertieModel {
   final String ownerName;
   final String title;
-  final String imageUrl;
+  final List<String> imageUrls;
   final String propertyType;
   final double area;
   final double price;
@@ -18,7 +18,7 @@ class PropertieModel {
   PropertieModel({
     required this.ownerName,
     required this.title,
-    required this.imageUrl,
+    required this.imageUrls,
     required this.propertyType,
     required this.area,
     required this.price,
@@ -35,7 +35,7 @@ class PropertieModel {
     return {
       "ownerName": ownerName,
       "title": title,
-      "imageUrl": imageUrl,
+      "imageUrls": imageUrls,
       "propertyType": propertyType,
       "area": area,
       "price": price,
@@ -52,17 +52,17 @@ class PropertieModel {
     return PropertieModel(
       ownerName: map["ownerName"] ?? "",
       title: map["title"] ?? "",
-      imageUrl: map["imageUrl"] ?? "",
+      imageUrls: List<String>.from(map["imageUrls"] ?? []),
       propertyType: map["propertyType"],
       area: (map["area"] as num).toDouble(),
       price: (map["price"] as num).toDouble(),
       bed: map["bed"],
       bath: map["bath"],
       location: map["location"],
-      description: map["description"],
+      description: map["description"] ?? "",
       createdAt: map["createdAt"] as Timestamp?,
       id: ID ?? "",
-      ownerID: map["ownerID"],
+      ownerID: map["ownerID"] ?? "",
     );
   }
 }

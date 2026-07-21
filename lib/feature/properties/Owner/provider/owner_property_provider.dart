@@ -13,8 +13,8 @@ class OwnerPropertyProvider with ChangeNotifier {
   bool _isLoading = false;
   bool get isLoading => _isLoading;
 
-  File? _selectedImage;
-  File? get selectedImage => _selectedImage;
+  List<File> _selectedImage = [];
+  List<File> get selectedImage => _selectedImage;
 
   void setLoading(bool value) {
     _isLoading = value;
@@ -23,7 +23,7 @@ class OwnerPropertyProvider with ChangeNotifier {
 
   Future<void> pickPopertyImage() async {
     final image = await _imagerPicker.pickImageFromGallery();
-    if (image == null) return;
+
     _selectedImage = image;
     notifyListeners();
   }
@@ -38,7 +38,7 @@ class OwnerPropertyProvider with ChangeNotifier {
     required int bath,
     required String location,
     required String description,
-    required File imageFile,
+    required List<File> imageFile,
   }) async {
     setLoading(true);
     try {
