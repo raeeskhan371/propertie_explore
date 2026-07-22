@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
+import 'package:propertie_explore/feature/auth/services/auth_services.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/services/owner_cloudnary_services.dart';
 
@@ -10,6 +11,7 @@ class OwnerPropertyServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final OwnerCloudnaryServices _cloudinaryService = OwnerCloudnaryServices();
+  final AuthFireBaseServices _authFireBaseServices = AuthFireBaseServices();
 
   Future<void> addProperty({
     required String ownerName,
@@ -32,8 +34,18 @@ class OwnerPropertyServices {
       imageFile,
     );
 
+    // getting data form userCollectioon Name , image url
+
+    final userDoc = await _firestore.collection("Users").doc(uid).get();
+
+    final data = userDoc.data() as Map<String, dynamic>;
+
+    final String userName = data["name"];
+    final String profileImageUrl = data["imageUrl"];
+
     final propertyModel = PropertieModel(
-      ownerName: ownerName,
+      ownerName: userName,
+      profileImageUrl: profileImageUrl,
       title: title,
       propertyType: propertyType,
       area: area,
@@ -44,7 +56,7 @@ class OwnerPropertyServices {
       description: description,
       ownerID: uid,
       // this  is  the imageurl provided by cloudnary services
-      imageUrls: ImageUrl,
+      propertyImageUrls: ImageUrl,
     );
 
     await _firestore.collection("properties").doc().set(propertyModel.toMap());
@@ -196,6 +208,7 @@ class OwnerPropertyServices {
       final uid = _auth.currentUser!.uid;
       final propertie = PropertieModel(
         ownerName: ownerName,
+        profileImageUrl: "",
         title: title,
         propertyType: propertyType,
         area: area,
@@ -205,7 +218,7 @@ class OwnerPropertyServices {
         location: location,
         description: description,
         ownerID: uid,
-        imageUrls: [],
+        propertyImageUrls: [],
       );
       await _firestore
           .collection("properties")

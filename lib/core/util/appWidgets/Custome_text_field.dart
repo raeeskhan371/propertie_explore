@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CustomTextField extends StatelessWidget {
+class CustomTextField extends StatefulWidget {
   final String hint;
   final IconData icon;
   final TextEditingController controller;
   final TextCapitalization textCap;
-  final bool isVisible = false;
+  final List<TextInputFormatter>? inputformatter;
+  final TextInputType? textInputType;
 
   const CustomTextField({
     super.key,
@@ -14,7 +16,16 @@ class CustomTextField extends StatelessWidget {
     required this.icon,
     required this.controller,
     this.textCap = TextCapitalization.none,
+    this.inputformatter,
+    this.textInputType = TextInputType.text,
   });
+
+  @override
+  State<CustomTextField> createState() => _CustomTextFieldState();
+}
+
+class _CustomTextFieldState extends State<CustomTextField> {
+  final bool isVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -31,10 +42,12 @@ class CustomTextField extends StatelessWidget {
         ],
       ),
       child: TextFormField(
-        textCapitalization: textCap,
-        controller: controller,
+        keyboardType: widget.textInputType,
+        inputFormatters: widget.inputformatter,
+        textCapitalization: widget.textCap,
+        controller: widget.controller,
         decoration: InputDecoration(
-          hintText: hint,
+          hintText: widget.hint,
           hintStyle: GoogleFonts.poppins(
             color: Colors.green,
             fontSize: 13,
@@ -46,7 +59,7 @@ class CustomTextField extends StatelessWidget {
               color: const Color(0xffF3F8F3),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: Icon(icon, color: const Color(0xff4CAF50), size: 14),
+            child: Icon(widget.icon, color: const Color(0xff4CAF50), size: 14),
           ),
           filled: true,
           fillColor: Colors.white,

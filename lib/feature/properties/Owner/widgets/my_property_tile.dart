@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/update_screen.dart';
 import 'package:propertie_explore/feature/properties/Owner/services/owner_property_services.dart';
+import 'package:provider/provider.dart';
 
 class PropertyOwnerTile extends StatelessWidget {
   const PropertyOwnerTile({super.key, required this.property});
@@ -30,21 +32,21 @@ class PropertyOwnerTile extends StatelessWidget {
             width: double.infinity,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: NetworkImage("${property.imageUrls}"),
+                image: NetworkImage("${property.propertyImageUrls}"),
                 fit: BoxFit.cover,
               ),
               color: Colors.grey.shade300,
               borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
             ),
             child: CarouselSlider.builder(
-              itemCount: property.imageUrls.length,
+              itemCount: property.propertyImageUrls.length,
               itemBuilder: (context, index, realIndex) {
                 return ClipRRect(
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16),
                   ),
                   child: Image.network(
-                    property.imageUrls[index],
+                    property.propertyImageUrls[index],
                     width: double.infinity,
                     height: 220,
                     fit: BoxFit.cover,
@@ -89,7 +91,7 @@ class PropertyOwnerTile extends StatelessWidget {
                     SizedBox(width: 5),
 
                     Text(
-                      "Rs ${property.price}.00",
+                      "Rs ${context.read<OwnerPropertyProvider>().priceFormeter(property.price)}",
                       style: TextStyle(
                         fontSize: 22,
                         color: Colors.green,

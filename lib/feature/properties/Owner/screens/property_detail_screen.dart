@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
+import 'package:provider/provider.dart';
 
 class PropertyDetailsScreen extends StatefulWidget {
   final PropertieModel propertyData;
@@ -94,7 +96,11 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
 
                     Row(
                       children: [
-                        Icon(Icons.person, size: 18),
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            "${widget.propertyData.profileImageUrl}",
+                          ),
+                        ),
                         SizedBox(width: 6),
                         Text(
                           "Published by: ${widget.propertyData.ownerName}",

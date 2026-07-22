@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PropertieModel {
   final String ownerName;
+  final String profileImageUrl;
   final String title;
-  final List<String> imageUrls;
+  final List<String> propertyImageUrls;
   final String propertyType;
   final double area;
   final double price;
@@ -17,8 +18,9 @@ class PropertieModel {
 
   PropertieModel({
     required this.ownerName,
+    required this.profileImageUrl,
     required this.title,
-    required this.imageUrls,
+    required this.propertyImageUrls,
     required this.propertyType,
     required this.area,
     required this.price,
@@ -34,8 +36,9 @@ class PropertieModel {
   Map<String, dynamic> toMap() {
     return {
       "ownerName": ownerName,
+      "profileImageUrl": profileImageUrl,
       "title": title,
-      "imageUrls": imageUrls,
+      "imageUrls": propertyImageUrls,
       "propertyType": propertyType,
       "area": area,
       "price": price,
@@ -51,8 +54,10 @@ class PropertieModel {
   factory PropertieModel.fromMap(Map<String, dynamic> map, String? ID) {
     return PropertieModel(
       ownerName: map["ownerName"] ?? "",
+      profileImageUrl: map["profileImageUrl"] ?? "",
+
       title: map["title"] ?? "",
-      imageUrls: List<String>.from(map["imageUrls"] ?? []),
+      propertyImageUrls: List<String>.from(map["imageUrls"] ?? []),
       propertyType: map["propertyType"],
       area: (map["area"] as num).toDouble(),
       price: (map["price"] as num).toDouble(),

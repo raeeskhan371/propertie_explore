@@ -162,7 +162,7 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
                               const SizedBox(height: 12),
 
                               Text(
-                                propertyItem.price.toString(),
+                                "Rs ${context.read<OwnerPropertyProvider>().priceFormeter(propertyItem.price)}",
                                 style: TextStyle(
                                   fontSize: 20,
                                   color: Colors.green,

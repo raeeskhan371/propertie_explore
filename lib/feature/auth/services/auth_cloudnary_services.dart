@@ -14,7 +14,7 @@ class AuthCloudnaryServices {
 
     final request = http.MultipartRequest("Post", url);
 
-    request.fields["upload_presey"] = _uploadpreset;
+    request.fields["upload_preset"] = _uploadpreset;
 
     request.files.add(
       await http.MultipartFile.fromPath("file", profileImage.path),

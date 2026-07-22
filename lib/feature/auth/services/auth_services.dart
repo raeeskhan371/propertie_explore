@@ -32,7 +32,8 @@ class AuthFireBaseServices {
 
       if (profileImage != null) {
         imageUrl = await _cloudnaryServices.profileimage(profileImage);
-      }
+      } else
+        return null;
 
       // saving data in firestore (Save Data in Database)
       final user = UserModel(
@@ -41,8 +42,10 @@ class AuthFireBaseServices {
         role: role,
         imageUrl: imageUrl,
       );
+      print("Before Firestore");
 
       await _firestore.collection("Users").doc(uid).set(user.toMap());
+      print("after Firestore");
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case "email-already-in-use":

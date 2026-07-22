@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/services/owner_imager_picker.dart';
@@ -10,28 +11,12 @@ import 'package:propertie_explore/feature/properties/Owner/services/owner_proper
 class OwnerPropertyProvider with ChangeNotifier {
   final OwnerPropertyServices _propertyServices = OwnerPropertyServices();
   final OwnerImagerPicker _imagerPicker = OwnerImagerPicker();
+
+  // Varaible
   bool _isLoading = false;
   bool get isLoading => _isLoading;
-
   List<File> _selectedImage = [];
   List<File> get selectedImage => _selectedImage;
-
-  void setLoading(bool value) {
-    _isLoading = value;
-    notifyListeners();
-  }
-
-  void removePreviewImage(int index) {
-    _selectedImage.removeAt(index);
-    notifyListeners();
-  }
-
-  Future<void> pickPopertyImage() async {
-    final image = await _imagerPicker.pickImageFromGallery();
-
-    _selectedImage = image;
-    notifyListeners();
-  }
 
   Future<void> addProperty({
     required String ownerName,
@@ -152,5 +137,31 @@ class OwnerPropertyProvider with ChangeNotifier {
     } finally {
       setLoading(false);
     }
+  }
+
+  /////// Helper Fuction
+  ///
+
+  String priceFormeter(double price) {
+    final formatter = NumberFormat("#,##0");
+
+    return formatter.format(price);
+  }
+
+  void setLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
+
+  void removePreviewImage(int index) {
+    _selectedImage.removeAt(index);
+    notifyListeners();
+  }
+
+  Future<void> pickPopertyImage() async {
+    final image = await _imagerPicker.pickImageFromGallery();
+
+    _selectedImage = image;
+    notifyListeners();
   }
 }

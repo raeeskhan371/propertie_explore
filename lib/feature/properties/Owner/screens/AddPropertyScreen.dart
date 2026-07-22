@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/core/util/appWidgets/Custome_text_field.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
@@ -69,6 +70,7 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                           UploadImageContainer(),
                           SizedBox(height: 10),
                           CustomTextField(
+                            inputformatter: [],
                             hint: "Title",
                             icon: Icons.title,
                             controller: titleController,
@@ -125,6 +127,15 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                             children: [
                               Expanded(
                                 child: CustomTextField(
+                                  textInputType:
+                                      TextInputType.numberWithOptions(
+                                        decimal: true,
+                                      ),
+                                  inputformatter: [
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d*\.?\d*'),
+                                    ),
+                                  ],
                                   hint: "Area(Marla)",
                                   icon: Icons.scale,
                                   controller: areaController,
@@ -133,6 +144,15 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                               SizedBox(width: 10),
                               Expanded(
                                 child: CustomTextField(
+                                  textInputType:
+                                      TextInputType.numberWithOptions(
+                                        decimal: true,
+                                      ),
+                                  inputformatter: [
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'^\d*\.?\d*'),
+                                    ),
+                                  ],
                                   hint: "Price",
                                   icon: Icons.price_change,
                                   controller: priceController,
@@ -146,6 +166,12 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                             children: [
                               Expanded(
                                 child: CustomTextField(
+                                  textInputType:
+                                      TextInputType.numberWithOptions(),
+                                  inputformatter: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(2),
+                                  ],
                                   hint: "Bed",
                                   icon: Icons.bed,
                                   controller: bedController,
@@ -154,6 +180,12 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                               SizedBox(width: 10),
                               Expanded(
                                 child: CustomTextField(
+                                  textInputType:
+                                      TextInputType.numberWithOptions(),
+                                  inputformatter: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(2),
+                                  ],
                                   hint: "Bath",
                                   icon: Icons.bathroom,
                                   controller: bathController,
@@ -163,12 +195,17 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
                           ),
                           SizedBox(height: 10),
                           CustomTextField(
+                            textCap: TextCapitalization.words,
+                            textInputType: TextInputType.text,
+
                             hint: "Location",
                             icon: Icons.location_city,
                             controller: locationController,
                           ),
                           SizedBox(height: 10),
                           CustomTextField(
+                            textCap: TextCapitalization.words,
+                            textInputType: TextInputType.text,
                             hint: "Description",
                             icon: Icons.description,
                             controller: descController,
