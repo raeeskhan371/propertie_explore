@@ -21,6 +21,11 @@ class OwnerPropertyProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void removePreviewImage(int index) {
+    _selectedImage.removeAt(index);
+    notifyListeners();
+  }
+
   Future<void> pickPopertyImage() async {
     final image = await _imagerPicker.pickImageFromGallery();
 
