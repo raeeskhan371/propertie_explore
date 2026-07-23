@@ -61,7 +61,6 @@ class _UpdatePropertyImageSectionState
 
             const SizedBox(height: 15),
 
-            //===================== IMAGES =====================//
             Container(
               height: 270,
               width: double.infinity,

@@ -15,6 +15,7 @@ class MyPropertiesScreen extends StatefulWidget {
 class _MyPropertiesScreenState extends State<MyPropertiesScreen> {
   @override
   Widget build(BuildContext context) {
+    debugPrint("[ExplorePropertyApp] Screen: My Properties Screen Build");
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(

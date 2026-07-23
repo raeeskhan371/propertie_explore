@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
@@ -26,6 +27,7 @@ class OwnerPropertyServices {
     // this file is image file which is provided by user
     required List<File> imageFile,
   }) async {
+    debugPrint("[ExplorePropertyApp](Firestore) addProperty() Called");
     final uid = await _auth.currentUser!.uid;
     // in this imageUrl is store of cloudnaryservices url whihc soon provided to firebase to store
     // imageFIle is comefrom user and this function conver image into url
@@ -64,6 +66,9 @@ class OwnerPropertyServices {
   // fetching Owner Properties
 
   Stream<List<PropertieModel>> fetchingOwnerProperties() {
+    debugPrint(
+      "[ExplorePropertyApp](Firestore) fetchingOwnerProperties() Called",
+    );
     try {
       final uid = _auth.currentUser!.uid;
 
@@ -129,6 +134,9 @@ class OwnerPropertyServices {
   // fetching All OwnerProperties
 
   Stream<List<PropertieModel>> allUserDataFetchingProperties() {
+    debugPrint(
+      "[ExplorePropertyApp](Firestore) allUserDataFetchingProperties() Called",
+    );
     try {
       final data = _firestore
           .collection("properties")
@@ -205,6 +213,7 @@ class OwnerPropertyServices {
     required List<File> imageFile,
     required List<String> oldImages,
   }) async {
+    debugPrint("[ExplorePropertyApp](Firestore) updateProperty() Called");
     try {
       final uid = _auth.currentUser?.uid;
 
@@ -295,6 +304,8 @@ class OwnerPropertyServices {
   // Delete Funnction
 
   Future<void> deleteProperty({required String id}) async {
+    debugPrint("[ExplorePropertyApp](Firestore) deleteProperty() Called");
+
     try {
       final uid = _auth.currentUser!.uid;
 
@@ -349,6 +360,7 @@ class OwnerPropertyServices {
   }
 
   Future<UserModel> userFetching() async {
+    debugPrint("[ExplorePropertyApp](Firestore) userFetching() Called");
     try {
       final uid = _auth.currentUser!.uid;
       final result = await _firestore.collection("Users").doc(uid).get();

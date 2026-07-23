@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/widgets.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
@@ -31,6 +30,9 @@ class OwnerPropertyProvider with ChangeNotifier {
     required List<File> imageFile,
   }) async {
     setLoading(true);
+    debugPrint(
+      "[ExplorePropertyApp](Provider) fetchingOwnerProperties() Called",
+    );
     try {
       await _propertyServices.addProperty(
         ownerName: ownerName,
@@ -53,6 +55,9 @@ class OwnerPropertyProvider with ChangeNotifier {
 
   // fetching  indivuial OwnerProperties
   Stream<List<PropertieModel>> fetchingOwnerProperties() {
+    debugPrint(
+      "[ExplorePropertyApp](Provider) fetchingOwnerProperties() Called",
+    );
     setLoading(true);
     try {
       return _propertyServices.fetchingOwnerProperties();
@@ -66,6 +71,9 @@ class OwnerPropertyProvider with ChangeNotifier {
   // fetching  All OwnerProperties
 
   Stream<List<PropertieModel>> fetchingAllOwnerProperties() {
+    debugPrint(
+      "[ExplorePropertyApp](Provider) fetchingAllOwnerProperties() Called",
+    );
     setLoading(true);
     try {
       return _propertyServices.allUserDataFetchingProperties();
@@ -87,10 +95,10 @@ class OwnerPropertyProvider with ChangeNotifier {
     required String location,
     required String description,
     required String id,
-
     required List<String> oldImagesUrl,
   }) async {
     setLoading(true);
+    debugPrint("[ExplorePropertyApp](Provider) UpdateProperty() Called");
     try {
       _propertyServices.UpdateProperty(
         title: title,
@@ -115,6 +123,8 @@ class OwnerPropertyProvider with ChangeNotifier {
   // deleteProperty
 
   Future<void> deleteProperty({required String id}) async {
+    debugPrint("[ExplorePropertyApp](Provider) deleteProperty() Called");
+
     setLoading(true);
 
     try {
@@ -129,6 +139,7 @@ class OwnerPropertyProvider with ChangeNotifier {
   // userFetching data
 
   Future<UserModel> userFetching() async {
+    debugPrint("[ExplorePropertyApp](Provider) userFetching() Called");
     setLoading(true);
     try {
       return await _propertyServices.userFetching();
@@ -143,6 +154,8 @@ class OwnerPropertyProvider with ChangeNotifier {
   ///
 
   String priceFormeter(double price) {
+    debugPrint("[ExplorePropertyApp](Provider) priceFormater() Called");
+
     final formatter = NumberFormat("#,##0");
 
     return formatter.format(price);
@@ -159,9 +172,10 @@ class OwnerPropertyProvider with ChangeNotifier {
   }
 
   Future<void> pickPopertyImage() async {
+    debugPrint("[ExplorePropertyApp](Provider) pickPopertyImage() Called");
     final image = await _imagerPicker.pickImageFromGallery();
-
     _selectedImage = image;
+
     notifyListeners();
   }
 }

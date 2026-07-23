@@ -55,6 +55,9 @@ class _UpdatePropertyScreenState extends State<UpdatePropertyScreen> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(
+      " [ExplorePropertyApp](Update Screen) UpdateScreenBuild()  Called",
+    );
     return Scaffold(
       backgroundColor: Colors.green,
       body: SafeArea(

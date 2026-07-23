@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/AddPropertyScreen.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/explore_properties_screen.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/my_properties_screen.dart';
-import 'package:propertie_explore/feature/properties/Owner/screens/profile_screen.dart';
+import 'package:propertie_explore/feature/auth/screens/profile_screen.dart';
 
 class OwnerBottomBar extends StatefulWidget {
   const OwnerBottomBar({super.key});

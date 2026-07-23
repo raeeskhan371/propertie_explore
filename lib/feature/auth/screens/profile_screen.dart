@@ -5,7 +5,6 @@ import 'package:propertie_explore/core/widgets/custome_Textfield.dart';
 import 'package:propertie_explore/feature/auth/provider/auth_provider.dart';
 import 'package:propertie_explore/feature/auth/screens/login_screen.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
-import 'package:propertie_explore/feature/properties/Owner/services/owner_property_services.dart';
 import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
