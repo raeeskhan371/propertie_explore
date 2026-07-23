@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
+import 'package:propertie_explore/feature/properties/Owner/screens/testing.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/update_screen.dart';
 import 'package:propertie_explore/feature/properties/Owner/services/owner_property_services.dart';
 import 'package:provider/provider.dart';

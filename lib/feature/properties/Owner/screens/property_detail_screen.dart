@@ -1,3 +1,5 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
@@ -70,12 +72,29 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                 height: 220,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/house.jpg"),
-                    fit: BoxFit.cover,
-                  ),
                   color: Colors.grey.shade300,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+                ),
+                child: CarouselSlider.builder(
+                  itemCount: widget.propertyData.propertyImageUrls.length,
+                  itemBuilder: (context, index, realIndex) {
+                    return ClipRRect(
+                      borderRadius: const BorderRadius.vertical(
+                        top: Radius.circular(16),
+                      ),
+                      child: Image.network(
+                        widget.propertyData.propertyImageUrls[index],
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                    );
+                  },
+                  options: CarouselOptions(
+                    height: 220,
+                    viewportFraction: 1,
+                    autoPlay: true,
+                    enlargeCenterPage: false,
+                  ),
                 ),
               ),
 
@@ -116,7 +135,7 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                         SizedBox(width: 5),
 
                         Text(
-                          "Rs ${widget.propertyData.price}",
+                          "Rs ${context.read<OwnerPropertyProvider>().priceFormeter(widget.propertyData.price)}",
                           style: TextStyle(
                             fontSize: 22,
                             color: Colors.green,

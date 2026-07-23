@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
-import 'package:propertie_explore/feature/properties/Owner/widgets/my_property_tile.dart';
+import 'package:propertie_explore/feature/properties/Owner/widgets/my_property_tile/my_property_tile.dart';
 import 'package:provider/provider.dart';
 
 class MyPropertiesScreen extends StatefulWidget {

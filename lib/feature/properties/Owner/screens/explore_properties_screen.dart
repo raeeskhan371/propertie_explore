@@ -60,7 +60,8 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
             return ListView.builder(
               itemCount: data.length,
               itemBuilder: (context, index) {
-                final propertyItem = data![index];
+                final propertyItem = data[index];
+                ;
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -100,7 +101,9 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
                               top: Radius.circular(16),
                             ),
                             image: DecorationImage(
-                              image: AssetImage("assets/images/house.jpg"),
+                              image: NetworkImage(
+                                "${propertyItem.propertyImageUrls.first}",
+                              ),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -140,6 +143,24 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
                                 ],
                               ),
 
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 15,
+                                    backgroundImage: NetworkImage(
+                                      "${propertyItem.profileImageUrl}",
+                                    ),
+                                  ),
+                                  SizedBox(width: 6),
+                                  Text(
+                                    "Published by: ${propertyItem.ownerName}",
+                                    style: TextStyle(
+                                      color: Colors.grey.shade700,
+                                    ),
+                                  ),
+                                ],
+                              ),
                               const SizedBox(height: 10),
 
                               Row(

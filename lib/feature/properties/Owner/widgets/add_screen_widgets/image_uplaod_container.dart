@@ -36,9 +36,7 @@ class _ImageUplaodContainerState extends State<UploadImageContainer> {
                         size: 32,
                       ),
                     ),
-
                     const SizedBox(height: 15),
-
                     const Text(
                       "Upload Property Photos",
                       style: TextStyle(
@@ -46,9 +44,7 @@ class _ImageUplaodContainerState extends State<UploadImageContainer> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-
                     const SizedBox(height: 6),
-
                     Text(
                       "PNG, JPG • Max 5 Images",
                       style: TextStyle(

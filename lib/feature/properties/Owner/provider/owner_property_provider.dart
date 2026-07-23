@@ -78,7 +78,6 @@ class OwnerPropertyProvider with ChangeNotifier {
 
   // updateProperty
   Future<void> UpdateProperty({
-    required String ownerName,
     required String title,
     required String propertyType,
     required double area,
@@ -88,12 +87,12 @@ class OwnerPropertyProvider with ChangeNotifier {
     required String location,
     required String description,
     required String id,
-    required String ownerID,
+
+    required List<String> oldImagesUrl,
   }) async {
     setLoading(true);
     try {
       _propertyServices.UpdateProperty(
-        ownerName: ownerName,
         title: title,
         propertyType: propertyType,
         area: area,
@@ -103,7 +102,8 @@ class OwnerPropertyProvider with ChangeNotifier {
         location: location,
         description: description,
         id: id,
-        ownerID: ownerID,
+        imageFile: _selectedImage,
+        oldImages: oldImagesUrl,
       );
     } catch (e) {
       rethrow;

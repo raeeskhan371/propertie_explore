@@ -192,7 +192,6 @@ class OwnerPropertyServices {
   // Edit Property
 
   Future<void> UpdateProperty({
-    required String ownerName,
     required String title,
     required String propertyType,
     required double area,
@@ -202,13 +201,33 @@ class OwnerPropertyServices {
     required String location,
     required String description,
     required String id,
-    required String ownerID,
+
+    required List<File> imageFile,
+    required List<String> oldImages,
   }) async {
     try {
-      final uid = _auth.currentUser!.uid;
+      final uid = _auth.currentUser?.uid;
+
+      // getting data form userCollectioon Name , image url
+
+      final userDoc = await _firestore.collection("Users").doc(uid).get();
+
+      final data = userDoc.data() as Map<String, dynamic>;
+
+      final String userName = data["name"];
+      final String profileImageUrl = data["imageUrl"];
+
+      List<String> propertyImages;
+
+      if (imageFile.isNotEmpty) {
+        propertyImages = await _cloudinaryService.uploadImages(imageFile);
+      } else {
+        propertyImages = oldImages;
+      }
+
       final propertie = PropertieModel(
-        ownerName: ownerName,
-        profileImageUrl: "",
+        ownerName: userName,
+        profileImageUrl: profileImageUrl,
         title: title,
         propertyType: propertyType,
         area: area,
@@ -218,7 +237,7 @@ class OwnerPropertyServices {
         location: location,
         description: description,
         ownerID: uid,
-        propertyImageUrls: [],
+        propertyImageUrls: propertyImages,
       );
       await _firestore
           .collection("properties")
