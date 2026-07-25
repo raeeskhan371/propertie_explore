@@ -1,8 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
-import 'package:propertie_explore/feature/properties/Owner/screens/testing.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/update_screen.dart';
 import 'package:propertie_explore/feature/properties/Owner/services/owner_property_services.dart';
 import 'package:provider/provider.dart';
@@ -32,10 +32,6 @@ class PropertyOwnerTile extends StatelessWidget {
             height: 220,
             width: double.infinity,
             decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage("${property.propertyImageUrls}"),
-                fit: BoxFit.cover,
-              ),
               color: Colors.grey.shade300,
               borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
             ),
@@ -46,11 +42,16 @@ class PropertyOwnerTile extends StatelessWidget {
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(16),
                   ),
-                  child: Image.network(
-                    property.propertyImageUrls[index],
+                  child: CachedNetworkImage(
+                    imageUrl: property.propertyImageUrls[index],
+
                     width: double.infinity,
                     height: 220,
                     fit: BoxFit.cover,
+
+                    placeholder: (context, url) =>
+                        Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => Icon(Icons.home),
                   ),
                 );
               },

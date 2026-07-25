@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -82,10 +83,18 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                       borderRadius: const BorderRadius.vertical(
                         top: Radius.circular(16),
                       ),
-                      child: Image.network(
-                        widget.propertyData.propertyImageUrls[index],
-                        width: double.infinity,
+                      child: CachedNetworkImage(
+                        imageUrl: widget.propertyData.propertyImageUrls[index],
                         fit: BoxFit.cover,
+                        width: double.infinity,
+
+                        placeholder: (context, url) =>
+                            Center(child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) =>
+                            Icon(Icons.broken_image),
+                        errorListener: (value) {
+                          print(value);
+                        },
                       ),
                     );
                   },

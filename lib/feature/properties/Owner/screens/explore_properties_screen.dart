@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
@@ -95,17 +96,40 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
                         Container(
                           height: 180,
                           width: double.infinity,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
-                            borderRadius: BorderRadius.vertical(
-                              top: Radius.circular(16),
-                            ),
-                            image: DecorationImage(
-                              image: NetworkImage(
-                                "${propertyItem.propertyImageUrls.first}",
-                              ),
-                              fit: BoxFit.cover,
-                            ),
+                          child: CachedNetworkImage(
+                            imageUrl: propertyItem.propertyImageUrls.first,
+                            fit: BoxFit.cover,
+
+                            imageBuilder: (context, imageProvider) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(16),
+                                  ),
+                                  image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              );
+                            },
+                            placeholder: (context, url) {
+                              return Center(child: CircularProgressIndicator());
+                            },
+
+                            errorWidget: (context, url, error) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade300,
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(16),
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Icon(Icons.broken_image, size: 40),
+                                ),
+                              );
+                            },
                           ),
                         ),
 
