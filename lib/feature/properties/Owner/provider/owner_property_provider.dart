@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
-import 'package:propertie_explore/feature/properties/Owner/services/owner_imager_picker.dart';
-import 'package:propertie_explore/feature/properties/Owner/services/owner_property_services.dart';
+import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_imager_picker.dart';
+import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_property_services.dart';
 
 class OwnerPropertyProvider with ChangeNotifier {
   final OwnerPropertyServices _propertyServices = OwnerPropertyServices();

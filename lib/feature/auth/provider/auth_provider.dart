@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/services/auth_image_picker_services.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
-import 'package:propertie_explore/feature/properties/Owner/services/owner_imager_picker.dart';
+import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_imager_picker.dart';
 
 class AuthProvider with ChangeNotifier {
   final AuthFireBaseServices _authservices = AuthFireBaseServices();

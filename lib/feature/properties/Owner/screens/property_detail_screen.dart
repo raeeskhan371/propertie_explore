@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:propertie_explore/core/helper/cloudnary_helper_fucntions.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
@@ -84,7 +85,12 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                         top: Radius.circular(16),
                       ),
                       child: CachedNetworkImage(
-                        imageUrl: widget.propertyData.propertyImageUrls[index],
+                        imageUrl: CloudnaryHelper.optimizeImage(
+                          imageUrl:
+                              widget.propertyData.propertyImageUrls[index],
+                          width: 600,
+                          height: 400,
+                        ),
                         fit: BoxFit.cover,
                         width: double.infinity,
 

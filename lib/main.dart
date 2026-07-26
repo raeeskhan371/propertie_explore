@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/provider/auth_provider.dart';
 import 'package:propertie_explore/feature/auth/screens/auth_gate_screen.dart';
+import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_notification_services.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/AddPropertyScreen.dart';
 import 'package:propertie_explore/firebase_options.dart';
@@ -11,6 +12,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  OwnerNotificationServices notification = OwnerNotificationServices();
+  await notification.initNotification();
+
   runApp(
     MultiProvider(
       providers: [

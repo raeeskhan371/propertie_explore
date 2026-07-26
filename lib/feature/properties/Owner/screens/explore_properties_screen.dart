@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:propertie_explore/core/helper/cloudnary_helper_fucntions.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/property_detail_screen.dart';
 import 'package:propertie_explore/feature/properties/customer/services/services.dart';
@@ -97,7 +98,11 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
                           height: 180,
                           width: double.infinity,
                           child: CachedNetworkImage(
-                            imageUrl: propertyItem.propertyImageUrls.first,
+                            imageUrl: CloudnaryHelper.optimizeImage(
+                              imageUrl: propertyItem.propertyImageUrls.first,
+                              width: 600,
+                              height: 400,
+                            ),
                             fit: BoxFit.cover,
 
                             imageBuilder: (context, imageProvider) {

@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:propertie_explore/core/helper/cloudnary_helper_fucntions.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/update_screen.dart';
-import 'package:propertie_explore/feature/properties/Owner/services/owner_property_services.dart';
+import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_property_services.dart';
 import 'package:provider/provider.dart';
 
 class PropertyOwnerTile extends StatelessWidget {
@@ -43,7 +44,11 @@ class PropertyOwnerTile extends StatelessWidget {
                     top: Radius.circular(16),
                   ),
                   child: CachedNetworkImage(
-                    imageUrl: property.propertyImageUrls[index],
+                    imageUrl: CloudnaryHelper.optimizeImage(
+                      imageUrl: property.propertyImageUrls[index],
+                      width: 600,
+                      height: 400,
+                    ),
 
                     width: double.infinity,
                     height: 220,

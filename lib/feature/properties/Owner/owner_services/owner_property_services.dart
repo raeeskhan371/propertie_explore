@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
-import 'package:propertie_explore/feature/properties/Owner/services/owner_cloudnary_services.dart';
+import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_cloudnary_services.dart';
 
 class OwnerPropertyServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
