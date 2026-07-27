@@ -25,6 +25,13 @@ class _AddPropertyScreenState extends State<AddPropertyScreen> {
   TextEditingController bathController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController descController = TextEditingController();
+
+  @override
+  void initState() {
+    selectedPropertyType = null;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

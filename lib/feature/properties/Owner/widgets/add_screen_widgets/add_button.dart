@@ -20,7 +20,6 @@ class AddButton extends StatelessWidget {
     super.key,
     required this.onPropertyAdd,
     required this.selectedPropertyType,
-
     required this.titleController,
     required this.areaController,
     required this.priceController,

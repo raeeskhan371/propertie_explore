@@ -46,6 +46,8 @@ class OwnerPropertyProvider with ChangeNotifier {
         description: description,
         imageFile: imageFile,
       );
+      selectedImage.clear();
+      notifyListeners();
     } catch (e) {
       rethrow;
     } finally {
