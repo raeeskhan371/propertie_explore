@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -44,5 +46,38 @@ class OwnerNotificationServices {
       "fcmToken": Token,
     }, SetOptions(merge: true));
     debugPrint("Token is Save In Firebase");
+  }
+
+  Future<void> intialazationLocalNotification() async {
+    AndroidInitializationSettings andriodInit = AndroidInitializationSettings(
+      '@mipmap/ic_launcher',
+    );
+    InitializationSettings settings = InitializationSettings(
+      android: andriodInit,
+    );
+
+    await _plugins.initialize(settings: settings);
+  }
+
+  Future<void> showNotification({
+    required String title,
+    required String body,
+  }) async {
+    AndroidNotificationDetails andriodDetails = AndroidNotificationDetails(
+      "channelId",
+      "channelName",
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+
+    NotificationDetails details = NotificationDetails(android: andriodDetails);
+    int id = Random().nextInt(100000);
+
+    await _plugins.show(
+      id: id,
+      title: title,
+      body: body,
+      notificationDetails: details,
+    );
   }
 }

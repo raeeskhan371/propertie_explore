@@ -3,6 +3,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/core/helper/cloudnary_helper_fucntions.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_notification_services.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/update_screen.dart';
 import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_property_services.dart';
@@ -219,8 +220,41 @@ class PropertyOwnerTile extends StatelessWidget {
                         height: 54,
                         child: ElevatedButton.icon(
                           onPressed: () {
-                            OwnerPropertyServices().deleteProperty(
-                              id: property.id!,
+                            OwnerNotificationServices notificationServices =
+                                OwnerNotificationServices();
+
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: Text("Delete Property"),
+
+                                  content: Text("Are you sure?"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Cancel"),
+                                    ),
+
+                                    ElevatedButton(
+                                      onPressed: () async {
+                                        await OwnerPropertyServices()
+                                            .deleteProperty(id: property.id!);
+                                        notificationServices.showNotification(
+                                          title:
+                                              "🗑️ Property Removed Successfully",
+                                          body:
+                                              "Your property has been removed from the listings successfully.",
+                                        );
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text("Delete"),
+                                    ),
+                                  ],
+                                );
+                              },
                             );
                           },
                           icon: const Icon(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:propertie_explore/feature/properties/Owner/screens/AddPropertyScreen.dart';
+import 'package:propertie_explore/feature/properties/Owner/screens/add_property_screen.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/explore_properties_screen.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/my_properties_screen.dart';
 import 'package:propertie_explore/feature/auth/screens/profile_screen.dart';
