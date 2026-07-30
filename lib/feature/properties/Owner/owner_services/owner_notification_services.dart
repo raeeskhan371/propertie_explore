@@ -14,7 +14,6 @@ class OwnerNotificationServices {
 
   Future<void> initNotification() async {
     await requestPermistion();
-    await saveFCMToken();
   }
 
   Future<void> requestPermistion() async {
@@ -32,20 +31,9 @@ class OwnerNotificationServices {
     }
   }
 
-  Future<void> saveFCMToken() async {
-    final String? Token = await _messaging.getToken();
-
-    if (Token == null) {
-      return debugPrint("Token Not Genereated");
-    } else {
-      debugPrint("Token:${Token}");
-    }
-
-    final uid = _auth.currentUser?.uid;
-    await _firestore.collection("Users").doc(uid).set({
-      "fcmToken": Token,
-    }, SetOptions(merge: true));
-    debugPrint("Token is Save In Firebase");
+  Future<String?> saveFCMToken() async {
+    String? Token;
+    return Token = await _messaging.getToken();
   }
 
   Future<void> intialazationLocalNotification() async {

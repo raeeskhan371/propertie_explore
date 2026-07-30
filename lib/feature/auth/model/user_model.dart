@@ -6,11 +6,13 @@ class UserModel {
   final String role;
   final String? imageUrl;
   final Timestamp? createdAt;
+  String? Token;
 
   UserModel({
     required this.name,
     required this.email,
     required this.role,
+    this.Token,
     this.imageUrl,
     this.createdAt,
   });
@@ -21,6 +23,7 @@ class UserModel {
       "email": email,
       "role": role,
       "imageUrl": imageUrl,
+      "fcmToken": Token,
       "createdAt": FieldValue.serverTimestamp(),
     };
   }

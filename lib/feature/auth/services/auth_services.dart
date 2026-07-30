@@ -4,11 +4,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/auth/services/auth_cloudnary_services.dart';
+import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_notification_services.dart';
 
 class AuthFireBaseServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final AuthCloudnaryServices _cloudnaryServices = AuthCloudnaryServices();
+  final OwnerNotificationServices _notificationServices =
+      OwnerNotificationServices();
 
   /// Create User Fucntion
 
@@ -25,6 +28,7 @@ class AuthFireBaseServices {
           .createUserWithEmailAndPassword(email: email, password: password);
 
       final uid = userCredential.user!.uid;
+      final token = await _notificationServices.saveFCMToken();
 
       String? imageUrl;
 
@@ -39,6 +43,7 @@ class AuthFireBaseServices {
         email: email,
         role: role,
         imageUrl: imageUrl,
+        Token: token,
       );
       print("Before Firestore");
 

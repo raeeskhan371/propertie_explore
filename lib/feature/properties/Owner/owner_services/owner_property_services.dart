@@ -7,6 +7,7 @@ import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_cloudnary_services.dart';
+import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_notification_services.dart';
 
 class OwnerPropertyServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -216,6 +217,8 @@ class OwnerPropertyServices {
     debugPrint("[ExplorePropertyApp](Firestore) updateProperty() Called");
     try {
       final uid = _auth.currentUser?.uid;
+      final OwnerNotificationServices notificationServices =
+          OwnerNotificationServices();
 
       // getting data form userCollectioon Name , image url
 
@@ -252,6 +255,7 @@ class OwnerPropertyServices {
           .collection("properties")
           .doc(id)
           .update(propertie.toMap());
+      notificationServices.saveFCMToken();
     } on FirebaseException catch (e) {
       switch (e.code) {
         case "permission-denied":
