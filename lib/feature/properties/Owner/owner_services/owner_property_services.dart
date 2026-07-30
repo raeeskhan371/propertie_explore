@@ -255,7 +255,6 @@ class OwnerPropertyServices {
           .collection("properties")
           .doc(id)
           .update(propertie.toMap());
-      notificationServices.saveFCMToken();
     } on FirebaseException catch (e) {
       switch (e.code) {
         case "permission-denied":
