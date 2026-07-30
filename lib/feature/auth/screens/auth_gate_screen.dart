@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/screens/login_screen.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
-import 'package:propertie_explore/feature/properties/customer/screens/property_overview_screen.dart';
 import 'package:propertie_explore/feature/properties/Owner/screens/bottom_bar.dart';
 
 class AuthGateScreen extends StatefulWidget {
@@ -24,20 +23,25 @@ class _AuthGateScreenState extends State<AuthGateScreen> {
         }
 
         if (snapshot.hasData) {
-          return FutureBuilder(
-            future: AuthFireBaseServices().userCheck(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Scaffold(
-                  body: Center(child: CircularProgressIndicator()),
-                );
-              }
-              if (snapshot.data == "houseOwner") {
-                return OwnerBottomBar();
-              }
-              return PropertyOverviewScreen();
-            },
-          );
+          return OwnerBottomBar();
+
+          // Temporary Disbale
+
+          // FutureBuilder(
+          //   future: AuthFireBaseServices().userCheck(),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.connectionState == ConnectionState.waiting) {
+          //       return Scaffold(
+          //         body: Center(child: CircularProgressIndicator()),
+          //       );
+          //     }
+          //     // if (snapshot.data == "Owner") {
+          //     return OwnerBottomBar();
+          //     // }
+          //     // temporiry Disabled
+          //     // return PropertyOverviewScreen();
+          //   },
+          // );
         }
 
         return LoginScreen();

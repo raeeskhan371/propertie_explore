@@ -163,18 +163,20 @@ class _SingupScreenState extends State<SingupScreen> {
 
                       elevation: 1,
                       items: [
+                        // Tempeory disabled
+
+                        // DropdownMenuItem(
+                        //   value: "customer",
+                        //   child: Text(
+                        //     "Client",
+                        //     style: GoogleFonts.poppins(
+                        //       color: Colors.white,
+                        //       fontWeight: FontWeight.w600,
+                        //     ),
+                        //   ),
+                        // ),
                         DropdownMenuItem(
-                          value: "customer",
-                          child: Text(
-                            "Client",
-                            style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                        DropdownMenuItem(
-                          value: "houseOwner",
+                          value: "Owner",
                           child: Text(
                             "Owner",
                             style: GoogleFonts.poppins(

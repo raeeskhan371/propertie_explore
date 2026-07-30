@@ -134,26 +134,35 @@ class _LoginScreenState extends State<LoginScreen> {
                                 password: passwordController.text,
                               );
 
-                              final role = await context
-                                  .read<AuthProvider>()
-                                  .userCheck();
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => OwnerBottomBar(),
+                                ),
+                              );
 
-                              if (role == "houseOwner") {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => OwnerBottomBar(),
-                                  ),
-                                );
-                              } else {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PropertyOverviewScreen(),
-                                  ),
-                                );
-                              }
+                              // Temporary Disbaled userchecking
+
+                              // final role = await context
+                              //     .read<AuthProvider>()
+                              //     .userCheck();
+
+                              // if (role == "houseOwner") {
+                              //   Navigator.pushReplacement(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) => OwnerBottomBar(),
+                              //     ),
+                              //   );
+                              // } else {
+                              //   Navigator.pushReplacement(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //       builder: (context) =>
+                              //           PropertyOverviewScreen(),
+                              //     ),
+                              //   );
+                              // }
                             } catch (e) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
