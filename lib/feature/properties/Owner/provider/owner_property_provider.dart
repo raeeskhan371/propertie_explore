@@ -1,7 +1,9 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:propertie_explore/core/pagination/pagination_result.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
 import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_imager_picker.dart';
@@ -16,6 +18,53 @@ class OwnerPropertyProvider with ChangeNotifier {
   bool get isLoading => _isLoading;
   List<File> _selectedImage = [];
   List<File> get selectedImage => _selectedImage;
+
+  //____________________________________________________
+  // Pagination Variable for store Propertie
+  List<PropertieModel> _properties = [];
+  List<PropertieModel> get properties => _properties;
+  //Pagination use for cursore
+  DocumentSnapshot? _lastDocument;
+  DocumentSnapshot? get lastDocument => _lastDocument;
+  // pagination use for is firebase have more data ?
+  bool _hasMoreData = true;
+  bool get hastMoreData => _hasMoreData;
+
+  // use for to prevent dublicate data
+
+  bool _isFetchingMore = false;
+  bool get isFetchingMore => _isFetchingMore;
+
+  // Paginationn Function
+
+  Future<void> fetchinProperties() async {
+    if (_isFetchingMore || !_hasMoreData) return;
+
+    try {
+      _isFetchingMore = true;
+      notifyListeners();
+
+      final PaginationResult<PropertieModel> result = await _propertyServices
+          .fetchProperties(lastDocument);
+      print("[Pagin]New Properties: ${result.item.length}");
+
+      _properties.addAll(result.item);
+      debugPrint("[Pagin]Total Properties: ${_properties.length}");
+      _lastDocument = result.lastDocument;
+      debugPrint("[Pagin]Total LastDocument: ${_lastDocument}");
+      _hasMoreData = result.hasMoreData;
+      debugPrint("[Pagin]Total LastDocument: ${_hasMoreData}");
+
+      notifyListeners();
+    } catch (e) {
+      rethrow;
+    } finally {
+      _isFetchingMore = false;
+      notifyListeners();
+    }
+  }
+
+  //____________________________________________________
 
   Future<void> addProperty({
     required String ownerName,

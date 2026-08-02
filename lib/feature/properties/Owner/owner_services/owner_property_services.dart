@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:propertie_explore/core/pagination/pagination_result.dart';
 import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
@@ -415,5 +416,38 @@ class OwnerPropertyServices {
           );
       }
     }
+  }
+
+  // Function for Pagination
+
+  Future<PaginationResult<PropertieModel>> fetchProperties(
+    DocumentSnapshot? lastDocument,
+  ) async {
+    const int pageSize = 5;
+    // query is a firesbase object which
+    Query<Map<String, dynamic>> query = _firestore
+        .collection("properties")
+        .orderBy("createdAt", descending: true)
+        .limit(pageSize);
+
+    if (lastDocument != null) {
+      query = query.startAfterDocument(lastDocument);
+    }
+
+    final querySnapshot = await query.get();
+
+    final properties = querySnapshot.docs.map((doc) {
+      return PropertieModel.fromMap(doc.data(), doc.id);
+    }).toList();
+
+    final DocumentSnapshot? newLastDocument = querySnapshot.docs.isNotEmpty
+        ? querySnapshot.docs.last
+        : lastDocument;
+    final bool hasMoreData = querySnapshot.docs.length == pageSize;
+    return PaginationResult(
+      item: properties,
+      hasMoreData: hasMoreData,
+      lastDocument: newLastDocument,
+    );
   }
 }

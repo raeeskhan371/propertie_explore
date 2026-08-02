@@ -18,6 +18,27 @@ class ExplorePropertiesScreen extends StatefulWidget {
 
 class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
   CustomerServices property = CustomerServices();
+
+  final ScrollController _scrollController = ScrollController();
+
+  late OwnerPropertyProvider _provider;
+
+  @override
+  void initState() {
+    _provider = context.read<OwnerPropertyProvider>();
+    _provider.fetchinProperties();
+    _scrollController.addListener(_scrollListener);
+
+    super.initState();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.pixels >=
+        _scrollController.position.maxScrollExtent - 200) {
+      _provider.fetchinProperties();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,29 +62,23 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
             colors: [Color(0xFFFFFFFF), Color(0xFFE8F5E9), Color(0xFFC8E6C9)],
           ),
         ),
-        child: StreamBuilder<List<PropertieModel>>(
-          stream: context
-              .read<OwnerPropertyProvider>()
-              .fetchingAllOwnerProperties(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
+        child: Consumer<OwnerPropertyProvider>(
+          builder: (context, provider, child) {
+            final data = provider.properties;
+
+            if (provider.isLoading && data.isEmpty) {
               return const Center(child: CircularProgressIndicator());
             }
 
-            if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
-            }
-
-            if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            if (data.isEmpty) {
               return const Center(child: Text("No Properties Found"));
             }
-
-            final data = snapshot.data!;
             return ListView.builder(
+              controller: _scrollController,
               itemCount: data.length,
               itemBuilder: (context, index) {
                 final propertyItem = data[index];
-                ;
+
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
