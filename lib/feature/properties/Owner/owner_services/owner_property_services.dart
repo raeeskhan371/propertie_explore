@@ -450,4 +450,17 @@ class OwnerPropertyServices {
       lastDocument: newLastDocument,
     );
   }
+
+  Future<List<PropertieModel>> searchProperties(String query) async {
+    print("Query:$query");
+    final result = await _firestore
+        .collection("properties")
+        .where("title", isGreaterThanOrEqualTo: query)
+        .where("title", isLessThanOrEqualTo: "$query\uf8ff")
+        .get();
+
+    return result.docs.map((doc) {
+      return PropertieModel.fromMap(doc.data(), doc.id);
+    }).toList();
+  }
 }

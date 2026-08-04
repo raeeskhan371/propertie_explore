@@ -35,6 +35,34 @@ class OwnerPropertyProvider with ChangeNotifier {
   bool _isFetchingMore = false;
   bool get isFetchingMore => _isFetchingMore;
 
+  // Searching varaibles
+
+  List<PropertieModel> _searchResults = [];
+
+  List<PropertieModel> get searchResults => _searchResults;
+
+  String _searchQuery = "";
+
+  String get searchQuery => _searchQuery;
+
+  //Searching Fucntionv
+  Future<void> updateSearch(String value) async {
+    print("Provider: $value");
+
+    _searchQuery = value;
+    notifyListeners();
+
+    if (value.trim().isEmpty) {
+      _searchResults = [];
+      notifyListeners();
+      return;
+    }
+
+    _searchResults = await _propertyServices.searchProperties(value);
+
+    notifyListeners();
+  }
+
   // Paginationn Function
 
   Future<void> fetchinProperties() async {
