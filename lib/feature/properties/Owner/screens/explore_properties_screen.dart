@@ -246,13 +246,26 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
 
                                     const SizedBox(height: 12),
 
-                                    Text(
-                                      "Rs ${context.read<OwnerPropertyProvider>().priceFormeter(propertyItem.price)}",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.green,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                          "Rs ${context.read<OwnerPropertyProvider>().priceFormeter(propertyItem.price)}",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.green,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Text(
+                                          "Contact:${propertyItem.contact ?? "no Contact yet"}",
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                            color: Colors.blueGrey,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
                                     ),
 
                                     const SizedBox(height: 12),

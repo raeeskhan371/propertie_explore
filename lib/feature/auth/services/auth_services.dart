@@ -18,6 +18,8 @@ class AuthFireBaseServices {
   Future<void> userSinup({
     required String name,
     required String email,
+    required String contact,
+
     required String password,
     required String role,
     File? profileImage,
@@ -41,6 +43,7 @@ class AuthFireBaseServices {
       final user = UserModel(
         name: name,
         email: email,
+        contact: contact,
         role: role,
         imageUrl: imageUrl,
         Token: token,

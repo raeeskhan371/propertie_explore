@@ -40,6 +40,7 @@ class AuthProvider with ChangeNotifier {
   Future<void> userSingUp({
     required String name,
     required String email,
+    required String contact,
     required String password,
     required String role,
     required File profileImage,
@@ -50,6 +51,7 @@ class AuthProvider with ChangeNotifier {
       await _authservices.userSinup(
         name: name,
         email: email,
+        contact: contact,
         password: password,
         role: role,
         profileImage: profileImage,

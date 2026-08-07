@@ -46,6 +46,7 @@ class OwnerPropertyServices {
 
     final String userName = data["name"];
     final String profileImageUrl = data["imageUrl"];
+    final String contactNumber = data["contactNumber"];
 
     final propertyModel = PropertieModel(
       ownerName: userName,
@@ -54,11 +55,13 @@ class OwnerPropertyServices {
       propertyType: propertyType,
       area: area,
       price: price,
+      contact: contactNumber,
       bed: bed,
       bath: bath,
       location: location,
       description: description,
       ownerID: uid,
+      searchTitle: title.toLowerCase(),
       // this  is  the imageurl provided by cloudnary services
       propertyImageUrls: ImageUrl,
     );
@@ -452,11 +455,12 @@ class OwnerPropertyServices {
   }
 
   Future<List<PropertieModel>> searchProperties(String query) async {
-    print("Query:$query");
+    final searchQuery = query.toLowerCase();
+    print("Query:$searchQuery");
     final result = await _firestore
         .collection("properties")
-        .where("title", isGreaterThanOrEqualTo: query)
-        .where("title", isLessThanOrEqualTo: "$query\uf8ff")
+        .where("searchTitle", isGreaterThanOrEqualTo: searchQuery)
+        .where("searchTitle", isLessThanOrEqualTo: "$searchQuery\uf8ff")
         .get();
 
     return result.docs.map((doc) {

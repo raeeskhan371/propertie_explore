@@ -26,6 +26,7 @@ class _SingupScreenState extends State<SingupScreen> {
 
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
+  final TextEditingController contactController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confrimPasswordController =
       TextEditingController();
@@ -87,6 +88,13 @@ class _SingupScreenState extends State<SingupScreen> {
                     AppTextformField(
                       controller: emailController,
                       hintText: "Email",
+                      prefixIcon: Icons.email,
+                    ),
+                    const SizedBox(height: 15),
+
+                    AppTextformField(
+                      controller: contactController,
+                      hintText: "Contact Number",
                       prefixIcon: Icons.email,
                     ),
                     const SizedBox(height: 15),
@@ -239,6 +247,7 @@ class _SingupScreenState extends State<SingupScreen> {
                             await context.read<AuthProvider>().userSingUp(
                               name: nameController.text,
                               email: emailController.text,
+                              contact: contactController.text,
                               password: passwordController.text,
                               role: SelectedRole,
                               profileImage: provider.selectedImage!,
