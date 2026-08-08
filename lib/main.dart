@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/provider/auth_provider.dart';
 import 'package:propertie_explore/feature/auth/screens/splash_screen.dart';
 import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_notification_services.dart';
+import 'package:propertie_explore/feature/properties/Owner/provider/favorite_provider.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
 import 'package:propertie_explore/firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -21,6 +22,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
         ChangeNotifierProvider(create: (_) => OwnerPropertyProvider()),
+        ChangeNotifierProvider(create: (_) => FavoriteProvider()),
       ],
       child: MyApp(),
     ),

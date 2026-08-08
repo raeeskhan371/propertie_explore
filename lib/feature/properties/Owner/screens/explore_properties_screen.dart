@@ -268,7 +268,7 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
                                       ],
                                     ),
 
-                                    const SizedBox(height: 12),
+                                    const SizedBox(height: 20),
 
                                     Row(
                                       mainAxisAlignment:
@@ -303,6 +303,7 @@ class _ExplorePropertiesScreenState extends State<ExplorePropertiesScreen> {
                                             ),
                                             SizedBox(width: 4),
                                             Text("${propertyItem.area} Marla"),
+                                            SizedBox(width: 4),
                                           ],
                                         ),
                                       ],

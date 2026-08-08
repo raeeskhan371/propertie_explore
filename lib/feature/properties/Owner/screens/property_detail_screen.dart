@@ -6,7 +6,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:propertie_explore/core/helper/cloudnary_helper_fucntions.dart';
 import 'package:propertie_explore/core/widgets/custome_ElevetedButton.dart';
 import 'package:propertie_explore/feature/properties/Owner/model/propertie_model.dart';
+import 'package:propertie_explore/feature/properties/Owner/provider/favorite_provider.dart';
 import 'package:propertie_explore/feature/properties/Owner/provider/owner_property_provider.dart';
+import 'package:propertie_explore/feature/properties/Owner/screens/Favourite_screen.dart';
 import 'package:provider/provider.dart';
 
 class PropertyDetailsScreen extends StatefulWidget {
@@ -223,12 +225,51 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
 
                     SizedBox(height: 25),
 
-                    Text(
-                      "Description",
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      children: [
+                        Text(
+                          "Description",
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Spacer(),
+
+                        Consumer<FavoriteProvider>(
+                          builder: (context, provider, child) {
+                            return GestureDetector(
+                              onTap: () async {
+                                if (!provider.isFavoruite) {
+                                  await context
+                                      .read<FavoriteProvider>()
+                                      .addFavouriteProperties(
+                                        widget.propertyData.id!,
+                                      );
+                                  provider.isFavourite(true);
+                                } else {
+                                  context.read<FavoriteProvider>().remove(
+                                    widget.propertyData.id!,
+                                  );
+                                  provider.isFavourite(false);
+                                }
+                              },
+
+                              child: Icon(
+                                provider.isFavoruite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border_outlined,
+
+                                color: provider.isFavoruite
+                                    ? Colors.redAccent
+                                    : Colors.grey,
+
+                                size: 30,
+                              ),
+                            );
+                          },
+                        ),
+                      ],
                     ),
 
                     SizedBox(height: 8),
@@ -257,6 +298,34 @@ class _PropertyDetailsScreenState extends State<PropertyDetailsScreen> {
                       ),
                       onPressed: () {
                         Navigator.pop(context);
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    AppElevatedButton(
+                      width: 370,
+                      height: 60,
+                      ContainerColor: Colors.green.shade700,
+                      borderRadius: 10,
+                      TextColor: Colors.white,
+                      fontSize: 20,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Favuoirte ",
+                            style: GoogleFonts.poppins(
+                              fontSize: 25,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (_) => FavoriteScreen()),
+                        );
                       },
                     ),
                   ],
