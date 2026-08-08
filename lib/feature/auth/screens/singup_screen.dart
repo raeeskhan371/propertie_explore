@@ -107,7 +107,7 @@ class _SingupScreenState extends State<SingupScreen> {
                           hintText: "Create Your Password",
                           suffix: IconButton(
                             onPressed: () {
-                              provider.visibilityTogle();
+                              provider.visibilityToggle();
                             },
                             icon: Icon(
                               provider.isPasswordHidden
@@ -130,7 +130,7 @@ class _SingupScreenState extends State<SingupScreen> {
                           hintText: "Confirm Your Password",
                           suffix: IconButton(
                             onPressed: () {
-                              provider.visibilityTogle();
+                              provider.visibilityToggle();
                             },
                             icon: Icon(
                               provider.isPasswordHidden
@@ -204,7 +204,7 @@ class _SingupScreenState extends State<SingupScreen> {
 
                     AppTextformField(
                       onPressed: () {
-                        context.read<AuthProvider>().profileImage();
+                        context.read<AuthProvider>().pickProfileImage();
                       },
                       readOnly: true,
                       hintText: "Upload Image",
@@ -244,7 +244,7 @@ class _SingupScreenState extends State<SingupScreen> {
                             print("${confrimPasswordController.text}");
                             print("$SelectedRole");
 
-                            await context.read<AuthProvider>().userSingUp(
+                            await context.read<AuthProvider>().signUp(
                               name: nameController.text,
                               email: emailController.text,
                               contact: contactController.text,

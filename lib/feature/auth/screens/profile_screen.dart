@@ -163,7 +163,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                       onPressed: () async {
                         try {
-                          await context.read<AuthProvider>().userLogout();
+                          await context.read<AuthProvider>().logout();
 
                           Navigator.pushReplacement(
                             context,

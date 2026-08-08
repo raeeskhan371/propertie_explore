@@ -1,14 +1,12 @@
 import 'dart:io';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:propertie_explore/feature/auth/services/auth_image_picker_services.dart';
 import 'package:propertie_explore/feature/auth/services/auth_services.dart';
-import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_imager_picker.dart';
 
 class AuthProvider with ChangeNotifier {
-  final AuthFireBaseServices _authservices = AuthFireBaseServices();
-  final AuthImagePickerServices _imagerPicker = AuthImagePickerServices();
+  final AuthFirebaseService _authService = AuthFirebaseService();
+  final AuthImagePickerServices _imagePickerService = AuthImagePickerServices();
   File? _selectedImage;
   File? get selectedImage => _selectedImage;
   bool _isLoading = false;
@@ -16,28 +14,36 @@ class AuthProvider with ChangeNotifier {
   bool _isPasswordHidden = true;
   bool get isPasswordHidden => _isPasswordHidden;
 
-  void visibilityTogle() {
+  void visibilityToggle() {
+    debugPrint(
+      "[AuthProvider] visibilityToggle → isPasswordHidden: $_isPasswordHidden",
+    );
     _isPasswordHidden = !_isPasswordHidden;
     notifyListeners();
   }
 
   void setLoading(bool value) {
+    debugPrint("[AuthProvider] setLoading → $_isLoading");
     _isLoading = value;
     notifyListeners();
   }
 
-  Future<void> profileImage() async {
-    final image = await _imagerPicker.profileImagePicker();
+  Future<void> pickProfileImage() async {
+    debugPrint("[AuthProvider] pickProfileImage → started");
+    final image = await _imagePickerService.profileImagePicker();
 
     if (image == null) {
+      debugPrint("[AuthProvider] pickProfileImage → no image selected");
       return;
     } else {
       _selectedImage = image;
+
+      debugPrint("[AuthProvider] pickProfileImage → image selected");
       notifyListeners();
     }
   }
 
-  Future<void> userSingUp({
+  Future<void> signUp({
     required String name,
     required String email,
     required String contact,
@@ -48,7 +54,8 @@ class AuthProvider with ChangeNotifier {
     setLoading(true);
 
     try {
-      await _authservices.userSinup(
+      debugPrint("[AuthProvider] signUp → started");
+      await _authService.signUp(
         name: name,
         email: email,
         contact: contact,
@@ -56,41 +63,49 @@ class AuthProvider with ChangeNotifier {
         role: role,
         profileImage: profileImage,
       );
+      debugPrint("[AuthProvider] signUp → completed");
     } catch (e) {
+      debugPrint("[AuthProvider] signUp → failed: $e");
       rethrow;
     } finally {
       setLoading(false);
     }
   }
 
-  Future<void> userLogin({
-    required String email,
-    required String password,
-  }) async {
+  Future<void> login({required String email, required String password}) async {
     setLoading(true);
 
     try {
-      await _authservices.userLogin(email: email, password: password);
+      debugPrint("[AuthProvider] login → started");
+      await _authService.login(email: email, password: password);
+
+      debugPrint("[AuthProvider] login → completed");
     } catch (e) {
+      debugPrint("[AuthProvider] login → failed: $e");
       rethrow;
     } finally {
       setLoading(false);
     }
   }
 
-  Future<String> userCheck() async {
+  Future<String> getUserRole() async {
+    debugPrint("[AuthProvider] getUserRole → started");
     try {
-      return await _authservices.userCheck();
+      return await _authService.getUserRole();
     } on Exception catch (e) {
+      debugPrint("[AuthProvider] getUserRole → failed: $e");
       rethrow;
     }
   }
 
-  Future<void> userLogout() async {
+  Future<void> logout() async {
+    debugPrint("[AuthProvider] logout → started");
     setLoading(true);
     try {
-      await _authservices.userLogout();
+      await _authService.logout();
+      debugPrint("[AuthProvider] logout → completed");
     } catch (e) {
+      debugPrint("[AuthProvider] logout → failed: $e");
       rethrow;
     } finally {
       setLoading(false);

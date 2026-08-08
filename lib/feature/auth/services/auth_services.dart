@@ -6,16 +6,15 @@ import 'package:propertie_explore/feature/auth/model/user_model.dart';
 import 'package:propertie_explore/feature/auth/services/auth_cloudnary_services.dart';
 import 'package:propertie_explore/feature/properties/Owner/owner_services/owner_notification_services.dart';
 
-class AuthFireBaseServices {
+class AuthFirebaseService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final AuthCloudnaryServices _cloudnaryServices = AuthCloudnaryServices();
   final OwnerNotificationServices _notificationServices =
       OwnerNotificationServices();
 
-  /// Create User Fucntion
-
-  Future<void> userSinup({
+  // SignUp
+  Future<void> signUp({
     required String name,
     required String email,
     required String contact,
@@ -43,10 +42,10 @@ class AuthFireBaseServices {
       final user = UserModel(
         name: name,
         email: email,
-        contact: contact,
+        contactNumber: contact,
         role: role,
         imageUrl: imageUrl,
-        Token: token,
+        fcmToken: token,
       );
       print("Before Firestore");
 
@@ -74,12 +73,8 @@ class AuthFireBaseServices {
     }
   }
 
-  // Login User  With Cheack Condition
-
-  Future<void> userLogin({
-    required String email,
-    required String password,
-  }) async {
+  // Login
+  Future<void> login({required String email, required String password}) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
@@ -108,9 +103,8 @@ class AuthFireBaseServices {
     }
   }
 
-  // User Logout
-
-  Future<void> userLogout() async {
+  // Logout
+  Future<void> logout() async {
     try {
       await _auth.signOut();
     } catch (e) {
@@ -118,7 +112,8 @@ class AuthFireBaseServices {
     }
   }
 
-  Future<String> userCheck() async {
+  // getUserRole
+  Future<String> getUserRole() async {
     try {
       final uid = _auth.currentUser!.uid;
 

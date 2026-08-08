@@ -14,7 +14,7 @@ class OwnerPropertyServices {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final OwnerCloudnaryServices _cloudinaryService = OwnerCloudnaryServices();
-  final AuthFireBaseServices _authFireBaseServices = AuthFireBaseServices();
+  final AuthFirebaseService _authFireBaseServices = AuthFirebaseService();
 
   Future<void> addProperty({
     required String ownerName,

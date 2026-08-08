@@ -3,18 +3,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class UserModel {
   final String name;
   final String email;
-  final String contact;
+  final String contactNumber;
   final String role;
   final String? imageUrl;
   final Timestamp? createdAt;
-  String? Token;
+  final String? fcmToken;
 
   UserModel({
     required this.name,
     required this.email,
     required this.role,
-    required this.contact,
-    this.Token,
+    required this.contactNumber,
+    this.fcmToken,
     this.imageUrl,
     this.createdAt,
   });
@@ -24,9 +24,9 @@ class UserModel {
       "name": name,
       "email": email,
       "role": role,
-      "contactNumber": contact,
+      "contactNumber": contactNumber,
       "imageUrl": imageUrl,
-      "fcmToken": Token,
+      "fcmToken": fcmToken,
       "createdAt": FieldValue.serverTimestamp(),
     };
   }
@@ -35,11 +35,11 @@ class UserModel {
     return UserModel(
       name: map["name"] ?? "",
       email: map["email"] ?? "",
-      contact: map["contactNumber"] ?? "",
+      contactNumber: map["contactNumber"] ?? "",
       role: map["role"] ?? "",
-
       imageUrl: map["imageUrl"] ?? " no pic uplaoded",
-      createdAt: (map["createdAt"] as Timestamp),
+      fcmToken: map["fcmToken"],
+      createdAt: map["createdAt"] as Timestamp?,
     );
   }
 }

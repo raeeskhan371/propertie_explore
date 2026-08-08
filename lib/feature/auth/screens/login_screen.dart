@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           hintText: "Enter Your Password",
                           suffix: IconButton(
                             onPressed: () {
-                              provider.visibilityTogle();
+                              provider.visibilityToggle();
                             },
                             icon: Icon(
                               provider.isPasswordHidden
@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                           onPressed: () async {
                             try {
-                              await context.read<AuthProvider>().userLogin(
+                              await context.read<AuthProvider>().login(
                                 email: emailController.text,
                                 password: passwordController.text,
                               );
